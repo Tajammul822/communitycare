@@ -24,6 +24,7 @@ Route::get('user', [UserController::class, 'users'])->name('user');
 Route::get('/user/add', [App\Http\Controllers\UserController::class, 'add'])->name('/user/add');
 Route::post('/user/store', [App\Http\Controllers\UserController::class, 'add_user'])->name('/user/store');
 Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('/user/edit/{id}');
-Route::post('user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit_user'])->name('user/edit/{id}');
+Route::post('user/edit/store/{id}', [App\Http\Controllers\UserController::class, 'edit_user'])->name('user/edit/store/{id}');
 Route::get('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('/user/delete/{id}');
+Route::get('/user/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('/user/profile/{id}');
 Route::get('dashboard', [AuthController::class, 'dashboard']);

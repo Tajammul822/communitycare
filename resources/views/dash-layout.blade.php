@@ -95,16 +95,19 @@
                             </a>
                         </div>
                     </li>
+                    @php
+                    $id = Auth::user()->id;
+                    @endphp
                     <li class="nav-item dropdown d-flex mr-4 ">
                         <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
                             <i class="icon-cog"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                             <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-                            <a class="dropdown-item preview-item">
+                            <a href="{{ url('/user/profile/'.$id) }}" class="dropdown-item preview-item">
                                 <i class="icon-head"></i> Profile
                             </a>
-                            <a class="dropdown-item preview-item">
+                            <a class="dropdown-item preview-item btn">
                                 <i class="icon-inbox"></i> Logout
                             </a>
                         </div>
@@ -211,6 +214,7 @@
             </nav>
 
             @yield('content')
+            @yield('profile-index-content')
 
         </div>
         <!-- page-body-wrapper ends -->
