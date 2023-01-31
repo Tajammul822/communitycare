@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,14 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('user', [UserController::class, 'users'])->name('user');
 Route::get('/user/add', [App\Http\Controllers\UserController::class, 'add'])->name('/user/add');
 Route::post('/user/store', [App\Http\Controllers\UserController::class, 'add_user'])->name('/user/store');
-Route::get('/user/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('/user/edit/{id}');
-Route::post('user/edit/store/{id}', [App\Http\Controllers\UserController::class, 'edit_user'])->name('user/edit/store/{id}');
+Route::get('user_edit/{id}', [App\Http\Controllers\UserController::class, 'user_ed'])->name('user_edit/{id}');
+Route::post('/user/edit', [App\Http\Controllers\UserController::class, 'edit_user'])->name('/user/edit');
 Route::get('/user/delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('/user/delete/{id}');
-Route::get('/user/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('/user/profile/{id}');
 Route::get('dashboard', [AuthController::class, 'dashboard']);
+
+//Admin Profile
+Route::get('/user/profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('/user/profile/{id}');
+Route::post('change-password', [AdminController::class, 'change_password'])->name('password.post');
+Route::post('change-picture', [AdminController::class, 'change_picture'])->name('update-picture.post');
+Route::post('update-details', [AdminController::class, 'update_details'])->name('update-details.post');
+Route::post('additional-user-info', [AdminController::class, 'update_info'])->name('additional-info.post');

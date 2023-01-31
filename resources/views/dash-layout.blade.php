@@ -48,13 +48,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
-                    <li class="nav-item dropdown d-lg-flex d-none">
+                    <!-- <li class="nav-item dropdown d-lg-flex d-none">
                         <button type="button" class="btn btn-info font-weight-bold">+ Create New</button>
-                    </li>
+                    </li> -->
                     <li class="nav-item dropdown d-flex">
-                        <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
+                        <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
                             <i class="icon-air-play mx-0"></i>
-                        </a>
+                        </a> -->
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                             <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
                             <a class="dropdown-item preview-item">
@@ -112,11 +112,11 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown mr-4 d-lg-flex d-none">
+                    <!-- <li class="nav-item dropdown mr-4 d-lg-flex d-none">
                         <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
                             <i class="icon-grid"></i>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                     <span class="icon-menu"></span>
@@ -149,6 +149,12 @@
                         <a class="nav-link" href="{{ url('/user') }}">
                             <i class="icon-head menu-icon"></i>
                             <span class="menu-title">Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="fa fa-question-circle" style="font-size:24px"></i>
+                            <span class="menu-title">Questions</span>
                         </a>
                     </li>
                     <!-- <li class="nav-item">

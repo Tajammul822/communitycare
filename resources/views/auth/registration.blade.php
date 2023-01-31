@@ -15,19 +15,25 @@
                         <form action="{{ route('register.post') }}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <input type="text" id="name" class="form-control form-control-lg" placeholder="Name" name="name" required autofocus>
-                                @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <input type="text" id="first_name" class="form-control form-control-lg" placeholder="First Name" name="first_name" required autofocus>
+                                @if ($errors->has('first_name'))
+                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <input type="text" id="email_address" class="form-control form-control-lg" placeholder="email" name="email" required autofocus>
+                                <input type="text" id="last_name" class="form-control form-control-lg" placeholder="Last Name" name="last_name" required autofocus>
+                                @if ($errors->has('last_name'))
+                                <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="email" class="form-control form-control-lg" placeholder="Email" name="email" required autofocus>
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <input type="password" id="password" class="form-control form-control-lg" placeholder="password" name="password" required>
+                                <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" name="password" required>
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif

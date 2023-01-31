@@ -44,7 +44,7 @@ class UserController extends Controller
         }
     }
 
-    public function edit($id)
+    public function user_ed($id)
     {
 
         $data['data'] = User::Find($id);

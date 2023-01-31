@@ -7,9 +7,6 @@
         margin: 0px;
     }
 
-    body {
-        background-color: #212121;
-    }
 
     .container {
         position: absolute;
@@ -23,7 +20,7 @@
     }
 
     .menu-icon {
-        position: absolute;
+
         right: 0;
         width: 53px;
         height: 53px;
@@ -103,19 +100,53 @@
     .user-edit-form {
         top: 2000%;
     }
+
+    .form-wrapper {
+        background-color: #f4f7fa;
+        padding: 2.5rem 2.5rem;
+    }
+
+    /* 
+    .stretch-card {
+        margin-right: 100px;
+    } */
+
+    li.list-group-item {
+        padding: 0;
+    }
+
+    .list-group-item a {
+        display: block;
+        padding: 0.75rem 1.25rem;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .list-group-item a:hover {
+        color: #fff;
+    }
 </style>
 
 <div class="main-panel">
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="min-height:320px;">
+        @if ( Session::get('success'))
+        <div class=" alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+        @endif
+        @if ( Session::get('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-3">
                 <div class="card-body">
                     <div class="container">
                         <div class="card">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">Cras justo odio</li>
-                                <li class="list-group-item">Dapibus ac facilisis in</li>
-                                <li class="list-group-item">Vestibulum at eros</li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="change_password" data-toggle="modal" data-target="#exampleModal">Change Password</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="update_picture" data-toggle="modal" data-target="#pictureModal">Update Picture</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="update_additional-info" data-toggle="modal" data-target="#infoModal">Update Additional Info</a></li>
                             </ul>
                         </div>
                     </div>
@@ -127,43 +158,42 @@
                     <div class="svg-background2"></div>
                     <div class="circle"></div>
 
-                    <img class="profile-img" src="{{ url('assets/images/faces/face28.png') }}">
+                    <img class="profile-img" src="{{ url('assets/images/profile/admin/'.@$data->picture) }}">
                     <div class="text-container">
-                        <p class="title-text">Austin May</p>
-                        <p class="info-text">Software Developer</p>
-                        <p class="desc-text">Hello, I am Austin May and I enjoy front-end web development. I fell in love with software development at Marshall University, where I graduated with a Bachelor's in Computer Science. </p>
+                        <p class="title-text">{{@$data->first_name}}</p>
+                        <p class="info-text">Admin</p>
+                        <p class="desc-text">{{@$data->email}}</p>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
-    <!-- <div class="user-edit-form">
-        <div class="col-lg-12 grid-margin stretch-card">
+    <div class="row form-wrapper mx-0">
+        <div class="col-lg-9 ml-auto grid-margin stretch-card mr-53px">
             <div class="card">
                 <div class="card-body">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-
-                        <h4>Add new User</h4>
-                        <form action="{{ route('/user/store') }}" method="POST">
+                        <h4>Update Details</h4>
+                        <form action="{{ route('update-details.post') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="faqs_id" value="{{@$data->id}}" />
                             <div class="form-group">
-                                <input type="text" id="name" class="form-control form-control-lg" placeholder="Name" name="name" required autofocus>
-                                @if ($errors->has('name'))
-                                <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <input type="text" id="name" class="form-control form-control-lg" name="first_name" placeholder="First Name" value="{{@$data->first_name}}" autofocus>
+                                @if ($errors->has('first_name'))
+                                <span class="text-danger">{{ $errors->first('first_name') }}</span>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <input type="text" id="email_address" class="form-control form-control-lg" placeholder="email" name="email" required autofocus>
+                                <input type="text" id="last_name" class="form-control form-control-lg" name="last_name" placeholder="Last Name" value="{{@$data->last_name}}" autofocus>
+                                @if ($errors->has('last_name'))
+                                <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="email_address" class="form-control form-control-lg" name="email" placeholder="Email" value="{{@$data->email}}" autofocus>
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
-                            <div class="form-group">
-                                <input type="password" id="password" class="form-control form-control-lg" placeholder="password" name="password" required>
-                                @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
                             </div>
                             <div class="mt-3">
@@ -176,9 +206,229 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
+        </div>
+    </footer>
+</div>
+<!-- Change password -->
 
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('password.post') }}" method="POST" id="change-password-form">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Old Password</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" name="old_password" />
+                                                <span class="text-danger error-text old_password_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">New Password</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" name="new_password" />
+                                                <span class="text-danger error-text new_password_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Confirm Password</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" name="confirm_password" />
+                                                <span class="text-danger error-text confirm_password_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="add_new">Update Password</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
+<!-- update picture -->
+
+<div class="modal" id="pictureModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Update Profile Picture</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('update-picture.post') }}" method="POST" id="change-picture-form" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Upload Here</label>
+                                            <div class="col-sm-9">
+                                                <input type="file" class="form-control" name="picture" />
+                                                <span class="text-danger error-text old_password_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="add_new">Update Picture</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- update additional info -->
+
+<div class="modal" id="infoModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Addition Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('additional-info.post') }}" method="POST" id="additional-info-form">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Address</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{@$data->address}}" name="address" />
+                                                <span class="text-danger error-text address_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Phone</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{@$data->phone}}" name="phone" />
+                                                <span class="text-danger error-text phone_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Zip Code</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{@$data->zip_code}}" name="zip_code" />
+                                                <span class="text-danger error-text zip_code_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Access Level</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="{{@$data->access_level}}" name="access_level" />
+                                                <span class="text-danger error-text access_level_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-primary" type="submit" name="add_new">Update Info</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script>
+    $(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#change-password-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: new FormData(this),
+                processData: false,
+                dataType: 'json',
+                contentType: false,
+                beforeSend: function() {
+                    $(document).find('span.error-text').text('');
+                },
+                success: function(data) {
+                    if (data.status == 0) {
+                        $.each(data.error, function(prefix, val) {
+                            $('span.' + prefix + '_error').text(val[0]);
+                        });
+                    } else {
+                        $('#change-password-form')[0].reset();
+                        alert(data.msg);
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 @endsection
