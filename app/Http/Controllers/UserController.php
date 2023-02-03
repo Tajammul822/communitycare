@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ValidationRules;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Hash;
 
 class UserController extends Controller
 {
@@ -17,69 +18,64 @@ class UserController extends Controller
     {
         $users = User::paginate(25);
 
-        return view('user-table', compact('users'));
+        return view('dashboard.users.index', compact('users'));
     }
-    public function add()
+    public function new_user(Request  $request)
     {
-
-        return view('create');
-    }
-    public function add_user(Request  $request)
-    {
-
-        // $request->validate(ValidationRules::storeUser());
-
-        $user = User::create($request->only([
-            'name', 'email', 'password'
-        ]));
-
+        $user                   = new User;
+        $user->first_name          = $request->first_name;
+        $user->last_name        = $request->last_name;
+        $user->email        = $request->email;
+        $user->address        = $request->address;
+        $user->phone        = $request->phone;
+        $user->zip_code        = $request->zip_code;
+        $user->access_level        = $request->access_level;
+        $user->password        = Hash::make($request->password);
 
         if ($user->save()) {
-
-            return redirect('user')->with('success', 'Saved User successfully');
-            //return redirect()->back()->with('user', $user);
-
+            return redirect()->route('user')->with('success', 'You have successfully added a user!');
         } else {
-            return redirect()->back()->with('error', 'Failed to save');
+            return redirect()->route('user')->with('error', 'Sorry, Something went wrong');
         }
     }
 
-    public function user_ed($id)
+    public function change($id)
     {
-
         $data['data'] = User::Find($id);
-        return view('user_edit', $data);
+        return view('dashboard.users.edit', $data);
     }
 
-    public function edit_user(Request  $request)
+    public function alter(Request  $request)
     {
-
-
-        $user                   = User::find($request->id);
-        $user->name            = $request->name;
-        $user->email           = $request->email;
-        $user->password        = $request->password;
+        // echo $request->last_name;
+        // exit;
+        $id = $request->user_id;
+        $user = User::Find($id);
+        $user->first_name          = $request->first_name;
+        $user->last_name        = $request->last_name;
+        $user->email        = $request->email;
+        $user->address        = $request->address;
+        $user->phone        = $request->phone;
+        $user->zip_code        = $request->zip_code;
+        $user->access_level        = $request->access_level;
+        $user->password        = Hash::make($request->password);
 
         if ($user->save()) {
-
-            return redirect('user')->with('success', 'Data saved successfully');
-            //return redirect()->back()->with('user', $user);
+            return redirect()->route('user')->with('success', 'You have successfully updated the details!');
         } else {
-            return redirect()->back()->with('error', 'Failed to save');
+            return redirect()->route('user')->with('error', 'Sorry, Something went wrong');
         }
     }
+
     public function delete($id)
     {
-
-
         User::where("id", $id)->delete();
-
-        return redirect()->back()->with('error', 'succefully deleted Subscriber');
+        return redirect()->route('user')->with('success', 'You have successfully deleted the User!');
     }
 
     public function profile($id)
     {
         $data['data'] = User::Find($id);
-        return view('profile.index', $data);
+        return view('dashboard.profile.index', $data);
     }
 }

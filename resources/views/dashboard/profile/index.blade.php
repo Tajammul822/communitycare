@@ -1,4 +1,4 @@
-@extends('dash-layout')
+@extends('dashboard.dash-layout')
 @section('profile-index-content')
 <style>
     * {
@@ -144,9 +144,9 @@
                     <div class="container">
                         <div class="card">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="change_password" data-toggle="modal" data-target="#exampleModal">Change Password</a></li>
-                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="update_picture" data-toggle="modal" data-target="#pictureModal">Update Picture</a></li>
-                                <li class="list-group-item"><a href="#" class="btn btn-outline-primary btn-lg" type="button" id="update_additional-info" data-toggle="modal" data-target="#infoModal">Update Additional Info</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-info btn-lg" type="button" id="change_password" data-toggle="modal" data-target="#exampleModal">Change Password</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-info btn-lg" type="button" id="update_picture" data-toggle="modal" data-target="#pictureModal">Update Picture</a></li>
+                                <li class="list-group-item"><a href="#" class="btn btn-outline-info btn-lg" type="button" id="update_additional-info" data-toggle="modal" data-target="#infoModal">Update Additional Info</a></li>
                             </ul>
                         </div>
                     </div>
@@ -219,7 +219,7 @@
 <div class="modal" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:#212529">
                 <h5 class="modal-title">Change Password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -265,7 +265,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="add_new">Update Password</button>
+                                    <button class="btn btn-info" type="submit" name="add_new">Update Password</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                         </div>
@@ -283,7 +283,7 @@
 <div class="modal" id="pictureModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:#212529">
                 <h5 class="modal-title">Update Profile Picture</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -307,7 +307,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="add_new">Update Picture</button>
+                                    <button class="btn btn-info" type="submit" name="add_new">Update Picture</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                         </div>
@@ -325,7 +325,7 @@
 <div class="modal" id="infoModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color:#212529">
                 <h5 class="modal-title">Addition Info</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -382,7 +382,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-primary" type="submit" name="add_new">Update Info</button>
+                                    <button class="btn btn-info" type="submit" name="add_new">Update Info</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                         </div>

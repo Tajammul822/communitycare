@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('auth.layout')
 
 @section('content')
 <div class="container-scroller">
@@ -7,9 +7,9 @@
             <div class="row w-100 mx-0">
                 <div class="col-lg-4 mx-auto">
                     <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                        <div class="brand-logo">
+                        <!-- <div class="brand-logo">
                             <img src="{{ url('assets/images/logo-dark.svg') }}" alt="logo">
-                        </div>
+                        </div> -->
                         <h4>New here?</h4>
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                         <form action="{{ route('register.post') }}" method="POST">

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Regal Admin</title>
+    <title>Community Healthcare</title>
     <!-- base:css -->
     <link rel="stylesheet" href="{{ url('assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/vendors/feather/feather.css') }}">
@@ -27,8 +27,8 @@
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="index.html"><img src="{{ url('assets/images/logo.svg') }}" alt="logo" /></a>
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style="background-color:#212529">
+                <a class="navbar-brand brand-logo" href="index.html"><img style="height:135px" src="{{ url('assets/images/logo-no-background.png') }}" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -36,25 +36,9 @@
                     <span class="icon-menu"></span>
                 </button>
                 <ul class="navbar-nav mr-lg-2">
-                    <li class="nav-item nav-search d-none d-lg-block">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="search">
-                                    <i class="icon-search"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search">
-                        </div>
-                    </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
-                    <!-- <li class="nav-item dropdown d-lg-flex d-none">
-                        <button type="button" class="btn btn-info font-weight-bold">+ Create New</button>
-                    </li> -->
                     <li class="nav-item dropdown d-flex">
-                        <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-                            <i class="icon-air-play mx-0"></i>
-                        </a> -->
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                             <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
                             <a class="dropdown-item preview-item">
@@ -112,11 +96,6 @@
                             </a>
                         </div>
                     </li>
-                    <!-- <li class="nav-item dropdown mr-4 d-lg-flex d-none">
-                        <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
-                            <i class="icon-grid"></i>
-                        </a>
-                    </li> -->
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
                     <span class="icon-menu"></span>
@@ -126,124 +105,60 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
             <!-- partial:partials/_sidebar.html -->
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <div class="user-profile">
-                    <div class="user-image">
-                        <img src="{{ url('assets/images/faces/face28.png') }}">
-                    </div>
-                    <div class="user-name">
-                        {{ Str::title(Auth::user()->name) }}
-                    </div>
-                    <div class="user-designation">
-                        Admin
-                    </div>
-                </div>
+            <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:#212529">
                 <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/dashboard') }}">
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('/dashboard') }}" style="border:none">
                             <i class="icon-box menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/user') }}">
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('/user') }}" style="border:none">
                             <i class="icon-head menu-icon"></i>
                             <span class="menu-title">Users</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">
-                            <i class="fa fa-question-circle" style="font-size:24px"></i>
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('admin/questions') }}" style="border:none">
+                            <i class="icon-paper menu-icon" style="font-size:24px"></i>
                             <span class="menu-title">Questions</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="icon-disc menu-icon"></i>
-                            <span class="menu-title">UI Elements</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                            </ul>
-                        </div>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="pages/forms/basic_elements.html">
-                            <i class="icon-file menu-icon"></i>
-                            <span class="menu-title">Form elements</span>
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('admin/answers') }}" style="border:none">
+                            <i class="icon-align-justify menu-icon" style="font-size:24px"></i>
+                            <span class="menu-title">Answers</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/charts/chartjs.html">
-                            <i class="icon-pie-graph menu-icon"></i>
-                            <span class="menu-title">Charts</span>
-                        </a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user')}}">
-                            <i class="icon-command menu-icon"></i>
-                            <span class="menu-title">Tables</span>
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('admin/forms') }}" style="border:none">
+                            <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
+                            <span class="menu-title">Forms</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/icons/feather-icons.html">
-                            <i class="icon-help menu-icon"></i>
-                            <span class="menu-title">Icons</span>
-                        </a>
-                    </li> -->
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                            <i class="icon-head menu-icon"></i>
-                            <span class="menu-title">User Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="docs/documentation.html">
-                            <i class="icon-book menu-icon"></i>
-                            <span class="menu-title">Documentation</span>
-                        </a>
-                    </li> -->
                 </ul>
             </nav>
 
             @yield('content')
             @yield('profile-index-content')
+            @yield('question-index-content')
+            @yield('question-edit-content')
+            @yield('answers-index-content')
+            @yield('answer-edit-content')
+            @yield('forms-index-content')
 
         </div>
         <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-
-    <!-- base:js -->
     <script src="{{ url('assets/vendors/base/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page-->
-    <!-- End plugin js for this page-->
-    <!-- inject:js -->
+
     <script src="{{ url('assets/js/off-canvas.js') }}"></script>
     <script src="{{ url('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ url('assets/js/template.js') }}"></script>
-    <!-- endinject -->
-    <!-- plugin js for this page -->
     <script src="{{ url('assets/vendors/chart.js/Chart.min.js') }}"></script>
     <script src="{{ url('assets/vendors/jquery-bar-rating/jquery.barrating.min.js') }}"></script>
-    <!-- End plugin js for this page -->
-    <!-- Custom js for this page-->
     <script src="{{ url('assets/js/dashboard.js') }}"></script>
-    <!-- End custom js for this page-->
 </body>
 
 </html>
