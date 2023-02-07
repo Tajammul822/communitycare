@@ -28,8 +28,8 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style="background-color:#212529">
-                <a class="navbar-brand brand-logo" href="index.html"><img style="height:135px" src="{{ url('assets/images/logo-no-background.png') }}" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}"><img style="height:135px" src="{{ url('assets/images/logo-no-background.png') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}"><img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -91,7 +91,7 @@
                             <a href="{{ url('/user/profile/'.$id) }}" class="dropdown-item preview-item">
                                 <i class="icon-head"></i> Profile
                             </a>
-                            <a class="dropdown-item preview-item btn">
+                            <a class="dropdown-item preview-item btn" href="{{ route('logout') }}">
                                 <i class="icon-inbox"></i> Logout
                             </a>
                         </div>

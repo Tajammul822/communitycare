@@ -30,11 +30,9 @@
                             <table class="table table-bordered" id="forms_table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Form Title</th>
+                                        <th>Submitted By</th>
                                         <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Zip Code</th>
                                         <th>Created Date</th>
                                         <th col-span="2">Action</th>
                                     </tr>
@@ -42,8 +40,6 @@
                                 <tbody>
 
                                     <tr>
-                                        <td></td>
-                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

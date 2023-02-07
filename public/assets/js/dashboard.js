@@ -144,6 +144,160 @@
       }
   
     };
+    if ($("#questions").length) {
+      var barChartCanvas = $("#questions").get(0).getContext("2d");
+      // This will get the first returned node in the jQuery collection.
+      var ctx = document.getElementById("questions");
+      ctx.height = 60;
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: dataBar,
+        options: optionsBar
+      });
+    }
+    var dataBarOrder = {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+      datasets: [{
+        label: 'Customers',
+        data: [5, 5, 5, 5, 10, 5, 5, 5],
+        backgroundColor: [
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#51c81c',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+        ],
+        borderColor: [
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#51c81c',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+        ],
+        borderWidth: 1,
+        fill: false
+      }]
+    };
+    var optionsBarOrder = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            display: false,
+            
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            display: false,
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      tooltips: {
+        enabled: false
+      }
+  
+    };
+    if ($("#answers").length) {
+      var barChartCanvas = $("#answers").get(0).getContext("2d");
+      // This will get the first returned node in the jQuery collection.
+      var ctx = document.getElementById("answers");
+      ctx.height = 60;
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar',
+        data: dataBar,
+        options: optionsBar
+      });
+    }
+    var dataBarOrder = {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"],
+      datasets: [{
+        label: 'Customers',
+        data: [5, 5, 5, 5, 10, 5, 5, 5],
+        backgroundColor: [
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#51c81c',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+        ],
+        borderColor: [
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+          '#51c81c',
+          '#dee5ef',
+          '#dee5ef',
+          '#dee5ef',
+        ],
+        borderWidth: 1,
+        fill: false
+      }]
+    };
+    var optionsBarOrder = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            display: false,
+            
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            beginAtZero: true,
+            display: false,
+          },
+          gridLines: {
+            display: false,
+            drawBorder: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      },
+      elements: {
+        point: {
+          radius: 0
+        }
+      },
+      tooltips: {
+        enabled: false
+      }
+  
+    };
     if ($("#orders").length) {
       var barChartCanvas = $("#orders").get(0).getContext("2d");
       // This will get the first returned node in the jQuery collection.

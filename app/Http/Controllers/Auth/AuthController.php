@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
+use App\Models\Question;
+use App\Models\Answer;
 use Hash;
 
 class AuthController extends Controller
@@ -81,7 +83,10 @@ class AuthController extends Controller
     public function dashboard()
     {
         if (Auth::check()) {
-            return view('dashboard.dashboard');
+            $userCount = User::count();
+            $questionCount = Question::count();
+            $answerCount = Answer::count();
+            return view('dashboard.dashboard', compact('userCount', 'questionCount', 'answerCount'));
         }
 
         return redirect("login")->withSuccess('Opps! You do not have access');

@@ -19,13 +19,13 @@
         overflow: hidden;
     }
 
-    .menu-icon {
+    /* .menu-icon {
 
         right: 0;
         width: 53px;
         height: 53px;
         filter: invert(40%) sepia(57%) saturate(2228%) hue-rotate(189deg) brightness(96%) contrast(87%);
-    }
+    } */
 
     .svg-background {
         width: 100%;
