@@ -147,6 +147,15 @@
             @yield('answers-index-content')
             @yield('answer-edit-content')
             @yield('forms-index-content')
+            @yield('forms-edit-content')
+            @yield('forms-questions-index-content')
+            @yield('forms-questions-edit-content')
+            @yield('forms-answers-index-content')
+            @yield('forms-answers-edit-content')
+
+
+
+
 
         </div>
         <!-- page-body-wrapper ends -->

@@ -7,6 +7,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\FormQuestionController;
+use App\Http\Controllers\FormAnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +52,7 @@ Route::get('admin/questions/edit/{id}', [QuestionController::class, 'edit'])->na
 Route::post('admin/questions/edit/store', [QuestionController::class, 'update'])->name('question.update');
 Route::get('admin/question-delete/{id}', [QuestionController::class, 'destroy'])->name('admin/question-delete/{id}');
 
-//admin questions crud
+//admin answers crud
 Route::get('admin/answers', [AnswerController::class, 'index'])->name('admin/answers');
 Route::post('admin/answers/add', [AnswerController::class, 'store'])->name('answers.add');
 Route::get('admin/answers/edit/{id}', [AnswerController::class, 'edit'])->name('admin/answers/edit/{id}');
@@ -59,3 +61,21 @@ Route::get('admin/answer-delete/{id}', [AnswerController::class, 'destroy'])->na
 
 //admin forms
 Route::get('admin/forms', [FormController::class, 'index'])->name('admin/forms');
+Route::post('admin/forms/store', [FormController::class, 'save'])->name('forms.add');
+Route::get('admin/forms/edit/{id}', [FormController::class, 'edit'])->name('admin/forms/edit/{id}');
+Route::post('admin/forms/edit/store', [FormController::class, 'update'])->name('form.update');
+Route::get('admin/form-delete/{id}', [FormController::class, 'destroy'])->name('admin/form-delete/{id}');
+
+//form questions
+Route::get('admin/forms/questions/{id}', [FormQuestionController::class, 'index'])->name('admin/forms/questions/{id}');
+Route::post('admin/forms/questions/store', [FormQuestionController::class, 'save'])->name('forms.questions.add');
+Route::get('admin/forms/questions/edit/{id}', [FormQuestionController::class, 'edit'])->name('admin/forms/questions/edit/{id}');
+Route::post('admin/forms/questions/edit/store', [FormQuestionController::class, 'update'])->name('forms.questions.update');
+Route::get('admin/forms/questions/delete/{id}', [FormQuestionController::class, 'destroy'])->name('admin/forms/questions/delete/{id}');
+
+//form answers
+Route::get('admin/forms/answers/{id}/{form_id}', [FormAnswerController::class, 'index'])->name('admin/forms/answers/{id}/{form_id}');
+Route::post('admin/forms/answers/store', [FormAnswerController::class, 'save'])->name('forms.answers.add');
+Route::get('admin/forms/answer-edit/{id}', [FormAnswerController::class, 'edit']);
+Route::post('admin/forms/answer-store', [FormAnswerController::class, 'update'])->name('forms.answer.update');
+Route::get('admin/forms/answer-delete/{id}', [FormAnswerController::class, 'delete']);
