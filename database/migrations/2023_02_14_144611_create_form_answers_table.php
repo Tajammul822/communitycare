@@ -16,11 +16,16 @@ return new class extends Migration
         Schema::create('form_answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('form_id');
+            $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('answer_id');
             $table->timestamps();
 
             $table->foreign('form_id')
                 ->references('id')->on('forms')->onDelete('cascade');
+
+            $table->foreign('question_id')
+                ->references('id')->on('questions')->onDelete('cascade');
+
 
             $table->foreign('answer_id')
                 ->references('id')->on('answers')->onDelete('cascade');

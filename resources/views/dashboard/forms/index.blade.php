@@ -45,6 +45,8 @@
                                             <a href="{{url('admin/forms/edit/'.$form_data->id)}}"><i class="fa fa-edit" style="font-size:20px; color:#212529"></i></a>
                                             <a class="delete-confirm" href="{{ url('admin/form-delete/'.$form_data->id) }}"><i class="fa fa-trash" style="font-size:20px; color:#212529"></i></a>
                                             <a href="{{url('admin/forms/questions/'.$form_data->id)}}"><i class="icon-circle-plus" style="font-size:20px; color:#212529"></i></a>
+                                            <a href="{{url('admin/forms/questions/'.$form_data->id)}}"><i class="icon-share" style="font-size:20px; color:#212529"></i></a>
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -56,12 +58,6 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
-        </div>
-    </footer>
 </div>
 
 <!-- add-form -->

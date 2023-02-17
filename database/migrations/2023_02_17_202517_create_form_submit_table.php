@@ -13,20 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('form_submit', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('form_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email')->unique();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('zip_code')->nullable();
-            $table->string('picture')->nullable();
-            $table->integer('access_level')->default(0);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('email');
+            $table->string('phone');
+            $table->string('zip_code');
+            $table->string('best_describe');
+            $table->string('language');
+            $table->string('help');
             $table->timestamps();
+
+            $table->foreign('form_id')
+                ->references('id')->on('forms')->onDelete('cascade');
         });
     }
 
@@ -37,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('form_submit');
     }
 };

@@ -60,12 +60,6 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from Bootstrapdash.com</span>
-        </div>
-    </footer>
 </div>
 
 <!-- add-form -->
@@ -91,6 +85,7 @@
                                         $form_id = request()->route('form_id');
                                         ?>
                                         <input name="form_id" type="hidden" value="{{$form_id}}" class="form-control">
+                                        <input name="question_id" type="hidden" value="{{$id}}" class="form-control">
                                         <div class="form-group row">
                                             <label class="col-sm-3 col-form-label"><strong>Answer</strong></label>
                                             <div class="col-sm-9">

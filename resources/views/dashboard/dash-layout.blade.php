@@ -120,6 +120,12 @@
                         </a>
                     </li>
                     <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('/admin/chw') }}" style="border:none">
+                            <i class="icon-head menu-icon"></i>
+                            <span class="menu-title">CHW</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('admin/questions') }}" style="border:none">
                             <i class="icon-paper menu-icon" style="font-size:24px"></i>
                             <span class="menu-title">Questions</span>
@@ -137,6 +143,7 @@
                             <span class="menu-title">Forms</span>
                         </a>
                     </li>
+
                 </ul>
             </nav>
 
@@ -152,6 +159,9 @@
             @yield('forms-questions-edit-content')
             @yield('forms-answers-index-content')
             @yield('forms-answers-edit-content')
+            @yield('chw-index-content')
+            @yield('chw-edit-content')
+
 
 
 

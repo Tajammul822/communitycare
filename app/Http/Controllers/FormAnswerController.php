@@ -15,7 +15,7 @@ class FormAnswerController extends Controller
     public function index($id, $form_id)
     {
 
-        $data['data'] = FormAnswer::where('form_id', $form_id)->get();
+        $data['data'] = FormAnswer::where('form_id', $form_id)->where('question_id', $id)->get();
         $data['answers'] = Answer::where('question_id', $id)->get();
 
         Session::put('index_answer', request()->fullUrl());
@@ -29,6 +29,7 @@ class FormAnswerController extends Controller
         $form_data = new FormAnswer;
         $form_data->form_id           = $form_id;
         $form_data->answer_id        = $request->answer_id;
+        $form_data->question_id        = $request->question_id;
         $form_data->save();
         if (session(key: 'index_answer')) {
             return redirect(session(key: 'index_answer'))->with('success', 'You have successfully added an Answer!');

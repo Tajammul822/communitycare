@@ -9,6 +9,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormQuestionController;
 use App\Http\Controllers\FormAnswerController;
+use App\Http\Controllers\ChwController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,14 @@ Route::post('admin/forms/answers/store', [FormAnswerController::class, 'save'])-
 Route::get('admin/forms/answer-edit/{id}', [FormAnswerController::class, 'edit']);
 Route::post('admin/forms/answer-store', [FormAnswerController::class, 'update'])->name('forms.answer.update');
 Route::get('admin/forms/answer-delete/{id}', [FormAnswerController::class, 'delete']);
+
+//admin chw
+Route::get('/admin/chw', [ChwController::class, 'index'])->name('/admin/chw');
+Route::post('/admin/chw-store', [ChwController::class, 'store'])->name('chw-add.post');
+Route::get('admin/chw-edit/{id}', [ChwController::class, 'change'])->name('admin/chw-edit/{id}');
+Route::post('admin/chw-edit-store', [ChwController::class, 'update'])->name('admin-chw.update');
+Route::get('admin/chw-delete/{id}', [ChwController::class, 'delete'])->name('admin/chw-delete/{id}');
+
+//display form on frontend
+Route::get('form/{slug}', [FormController::class, 'display'])->name('forms/{slug}');
+Route::post('form/store', [FormController::class, 'form_submit'])->name('form/store');
