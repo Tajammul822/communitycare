@@ -45,7 +45,7 @@
                                             <a href="{{url('admin/forms/edit/'.$form_data->id)}}"><i class="fa fa-edit" style="font-size:20px; color:#212529"></i></a>
                                             <a class="delete-confirm" href="{{ url('admin/form-delete/'.$form_data->id) }}"><i class="fa fa-trash" style="font-size:20px; color:#212529"></i></a>
                                             <a href="{{url('admin/forms/questions/'.$form_data->id)}}"><i class="icon-circle-plus" style="font-size:20px; color:#212529"></i></a>
-                                            <a href="{{url('admin/forms/questions/'.$form_data->id)}}"><i class="icon-share" style="font-size:20px; color:#212529"></i></a>
+                                            <a href="#" class="open_popup" type="button" data-toggle="modal" data-target="#shareModal" data-id="{{ $form_data->id }}"><i class="icon-share" style="font-size:20px; color:#212529"></i></a>
 
                                         </td>
                                     </tr>
@@ -107,6 +107,53 @@
     </div>
 </div>
 
+<!-- share form modal -->
+
+<div class="modal" id="shareModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#212529">
+                <h5 class="modal-title">Share this Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('forms.share.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="form_id" id="form_id" <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Email:</label>
+                                        <div class="col-sm-9">
+                                            <input name="email" type="text" id="typeText" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Name:</label>
+                                        <div class="col-sm-9">
+                                            <input name="name" type="text" id="typeText" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <button class="btn btn-info" type="submit" name="add_new">Share Now</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $.noConflict();
@@ -128,6 +175,10 @@
                 window.location.href = url;
             }
         });
+    });
+
+    $(".open_popup").click(function() {
+        $('#form_id').val($(this).attr('data-id'));
     });
 </script>
 @endsection

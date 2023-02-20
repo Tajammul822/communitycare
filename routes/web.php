@@ -91,3 +91,4 @@ Route::get('admin/chw-delete/{id}', [ChwController::class, 'delete'])->name('adm
 //display form on frontend
 Route::get('form/{slug}', [FormController::class, 'display'])->name('forms/{slug}');
 Route::post('form/store', [FormController::class, 'form_submit'])->name('form/store');
+Route::post('form/share', [FormController::class, 'form_share'])->name('forms.share.add');

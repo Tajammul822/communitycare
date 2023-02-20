@@ -13,6 +13,10 @@ use Redirect;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Str;
 use Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NotifyMail;
+use App\Models\FormSubmitAnswer;
+use Illuminate\Support\Facades\Validator;
 
 class FormController extends Controller
 {
@@ -89,9 +93,20 @@ class FormController extends Controller
 
     public function form_submit(Request $request)
     {
+
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            'zip_code' => 'required|numeric',
+            'best_describe' => 'required',
+            'language' => 'required',
+            'help' => 'required'
+
+        ]);
+
         $form_id = $request->form_id;
-        echo $request->best_describe;
-        exit;
         $form = new FormSubmit;
         $form->form_id =  $form_id;
         $form->first_name = $request->first_name;
@@ -102,7 +117,45 @@ class FormController extends Controller
         $form->best_describe = $request->best_describe;
         $form->language = $request->language;
         $form->help = $request->help;
-        $form->save();
-        echo 'successfull';
+
+        $question_answer = $request->responses;
+        if ($form->save()) {
+
+            foreach ($question_answer as $key => $value) {
+                $form_answer = new FormSubmitAnswer;
+                $form_answer->form_submit_id = $form->id;
+                $form_answer->question_id = $key;
+                $form_answer->answer_id = $value;
+                $form_answer->save();
+            }
+        }
+
+        return view('external.form.thankyou');
+    }
+
+    public function form_share(Request $request)
+    {
+        $form_id = $request->form_id;
+        $form_slug = Form::where('id', $form_id)->first();
+        $form_slug = $form_slug->slug;
+        $form_link = env('APP_URL') . '/form/' . $form_slug;
+
+        $email = $request->email;
+        $name = $request->name;
+        $sender_name = Auth::User()->first_name;
+        $sender_email = Auth::User()->email;
+        $data = ([
+            'name' => $name,
+            'receiver_email' => $email,
+            'sender_name' => $sender_name,
+            'sender_email' => $sender_email,
+            'form_link' => $form_link
+        ]);
+        $send = Mail::to($email)->send(new NotifyMail($data));;
+        if ($send) {
+            return redirect()->route('admin/forms')->with('success', 'You have successfully send the Form!');
+        } else {
+            return redirect()->route('admin/forms')->with('error', 'Sorry, Something went wrong!');
+        }
     }
 }
