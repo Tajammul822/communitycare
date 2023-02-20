@@ -62,7 +62,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-size:14px; line-height:1.6; font-weight: 400; font-family: 'Open Sans', Roboto, Arial; color: #626262; padding-bottom: 10px;">
-                                        Link: <b><a>{{$data['form_link']}}</a></b>
+                                        Link: <b><a href="{{$data['form_link']}}">{{$data['form_link']}}</a></b>
                                     </td>
                                 </tr>
                                 <tr>
