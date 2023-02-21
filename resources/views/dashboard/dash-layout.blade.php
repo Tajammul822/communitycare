@@ -143,6 +143,12 @@
                             <span class="menu-title">Forms</span>
                         </a>
                     </li>
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('admin/submitted-form') }}" style="border:none">
+                            <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
+                            <span class="menu-title">Submitted Forms</span>
+                        </a>
+                    </li>
 
                 </ul>
             </nav>
@@ -161,10 +167,8 @@
             @yield('forms-answers-edit-content')
             @yield('chw-index-content')
             @yield('chw-edit-content')
-
-
-
-
+            @yield('form-submit-index-content')
+            @yield('form-submit-show-content')
 
 
         </div>

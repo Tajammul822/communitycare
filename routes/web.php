@@ -10,6 +10,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormQuestionController;
 use App\Http\Controllers\FormAnswerController;
 use App\Http\Controllers\ChwController;
+use App\Http\Controllers\FormSubmitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,3 +93,7 @@ Route::get('admin/chw-delete/{id}', [ChwController::class, 'delete'])->name('adm
 Route::get('form/{slug}', [FormController::class, 'display'])->name('forms/{slug}');
 Route::post('form/store', [FormController::class, 'form_submit'])->name('form/store');
 Route::post('form/share', [FormController::class, 'form_share'])->name('forms.share.add');
+
+//admin submittted forms
+Route::get('admin/submitted-form', [FormSubmitController::class, 'index'])->name('admin/submitted-form');
+Route::get('admin/form-view/{id}', [FormSubmitController::class, 'show'])->name('admin/form-view/{id}');

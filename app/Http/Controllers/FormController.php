@@ -138,7 +138,7 @@ class FormController extends Controller
         $form_id = $request->form_id;
         $form_slug = Form::where('id', $form_id)->first();
         $form_slug = $form_slug->slug;
-        $form_link = env('APP_URL') . '/form/' . $form_slug;
+        $form_link = env("APP_URL") . '/form/' . $form_slug;
 
         $email = $request->email;
         $name = $request->name;

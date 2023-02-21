@@ -12,7 +12,7 @@ use App\Models\FormQuestion;
 class Question extends Model
 {
     use HasFactory;
-    protected $table = 'questions';
+    public $table = 'questions';
 
     protected $fillable = ['question'];
 
@@ -24,5 +24,10 @@ class Question extends Model
     public function answers()
     {
         return $this->hasMany(Answer::class, 'question_id');
+    }
+
+    public function submit_form_question()
+    {
+        return $this->belongsToMany(FormSubmitAnswer::class, 'question_id');
     }
 }
