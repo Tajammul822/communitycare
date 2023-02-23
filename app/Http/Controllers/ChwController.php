@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChwAssign;
+use App\Models\FormSubmit;
+use App\Models\FormSubmitAnswer;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ChwController extends Controller
 {
@@ -64,5 +68,30 @@ class ChwController extends Controller
     {
         User::where("id", $id)->delete();
         return redirect()->route('/admin/chw')->with('success', 'You have successfully deleted the CHW user!');
+    }
+
+    // chw dashboard module
+    public function dashboard()
+    {
+        $chw_users = User::where('access_level', 2)->get();
+        return view('dashboard.chw_dashboard.dashboard', compact('chw_users'));
+    }
+
+
+    public function assign_form()
+    {
+        $id = Auth::user()->id;
+        $chw_form = ChwAssign::where('user_id', $id)->get();
+        return view('dashboard.chw_dashboard.assign.index', compact('chw_form'));
+    }
+
+    public function assign_show($id)
+    {
+
+        $assign_user = FormSubmit::where('form_id', $id)->first();
+        $form_submit_id = $assign_user->id;
+        $assign_data = FormSubmitAnswer::where('form_submit_id', $form_submit_id)->get();
+
+        return view('dashboard.chw_dashboard.assign.show', compact('assign_user', 'assign_data'));
     }
 }

@@ -28,7 +28,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style="background-color:#212529">
-                <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}"><img style="height:135px" src="{{ url('assets/images/logo-no-background.png') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="{{ url('/dashboard') }}"><img style="height:180px; width:75%" src="{{ url('assets/images/default-monochrome.svg') }}" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="{{ url('/dashboard') }}"><img src="{{ url('assets/images/logo-mini.svg') }}" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -113,6 +113,7 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
+                    @if(Auth::user()->access_level == 1)
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('/user') }}" style="border:none">
                             <i class="icon-head menu-icon"></i>
@@ -149,6 +150,15 @@
                             <span class="menu-title">Submitted Forms</span>
                         </a>
                     </li>
+                    @endif
+                    @if(Auth::user()->access_level == 2)
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('chw/submitted-form') }}" style="border:none">
+                            <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
+                            <span class="menu-title">Assigned Forms</span>
+                        </a>
+                    </li>
+                    @endif
 
                 </ul>
             </nav>
@@ -169,6 +179,10 @@
             @yield('chw-edit-content')
             @yield('form-submit-index-content')
             @yield('form-submit-show-content')
+            @yield('chw-dashboard-content')
+            @yield('chw-form-assign-content')
+            @yield('chw-assign-show-content')
+
 
 
         </div>
