@@ -1,6 +1,12 @@
 @extends('dashboard.dash-layout')
 @section('chw-assign-show-content')
 
+<?php
+
+use App\Http\Controllers\ChwController;
+?>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <div class="main-panel">
     <div class="content-wrapper">
         @if ( Session::get('success'))
@@ -85,6 +91,55 @@
                             </p>
                         </blockquote>
                         @endforeach
+                        @foreach($chw_form as $form_data)
+                        <?php $assign_data_detail =  ChwController::get_assign_data_detail($form_data->id);
+                        ?>
+
+                        <i class="icon-paper icon-md text-warning"></i>
+                        <span><strong>Notes</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->notes)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ $data->notes }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <i class="icon-clock icon-md text-success"></i>
+                        <span><strong>Follow Up Routine</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->follow_up_date)!= NULL)
+                        <ul class="list-star">
+                            <li>{{ @$data->follow_up_date }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        @endforeach
+                    </div>
+
+                    <div class="card-body">
+                        <form action="{{ route('chw.task.add') }}" method="post">
+                            @csrf
+                            <?php
+                            $assign_id = request()->route('id');
+                            $user_id = request()->route('user_id');
+                            ?>
+                            <input type="hidden" name="assign_id" value="{{$assign_id}}">
+                            <input type="hidden" name="user_id" value="{{$user_id}}">
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">Write Notes if any:</p>
+                                </strong>
+                                <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">Select a follow up date and time:</p>
+                                </strong>
+                                <input type="datetime-local" name="follow_up_date" class="form-control" placeholder="Select date and time">
+
+                            </div>
+                            <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save Task</button>
+                        </form>
                     </div>
 
                 </div>
@@ -92,5 +147,15 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script>
+    config = {
+        enableTime: true,
+        dateFormat: 'Y-m-d H:i:s',
+    }
+    flatpickr("input[type=datetime-local]", config);
+</script>
 
 @endsection

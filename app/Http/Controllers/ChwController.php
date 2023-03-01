@@ -7,7 +7,9 @@ use App\Models\FormSubmit;
 use App\Models\FormSubmitAnswer;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\FormTask;
 use Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class ChwController extends Controller
@@ -73,8 +75,18 @@ class ChwController extends Controller
     // chw dashboard module
     public function dashboard()
     {
+        $id = Auth::user()->id;
         $chw_users = User::where('access_level', 2)->get();
-        return view('dashboard.chw_dashboard.dashboard', compact('chw_users'));
+        $chw_form = ChwAssign::where('user_id', $id)->get();
+        //dd($chw_form);
+
+        return view('dashboard.chw_dashboard.dashboard', compact('chw_users', 'chw_form'));
+    }
+
+    static function get_assign_data($assign_id)
+    {
+        $assign_data = FormTask::where('assign_id', $assign_id)->get();
+        return $assign_data;
     }
 
 
@@ -85,13 +97,34 @@ class ChwController extends Controller
         return view('dashboard.chw_dashboard.assign.index', compact('chw_form'));
     }
 
-    public function assign_show($id)
+    public function assign_show($form_id, $user_id, $id)
     {
-
-        $assign_user = FormSubmit::where('form_id', $id)->first();
+        $chw_form = ChwAssign::where('user_id', $user_id)->where('form_id', $form_id)->get();
+        $assign_user = FormSubmit::where('form_id', $form_id)->first();
         $form_submit_id = $assign_user->id;
         $assign_data = FormSubmitAnswer::where('form_submit_id', $form_submit_id)->get();
 
-        return view('dashboard.chw_dashboard.assign.show', compact('assign_user', 'assign_data'));
+        Session::put('show_chw_form', request()->fullUrl());
+
+        return view('dashboard.chw_dashboard.assign.show', compact('assign_user', 'assign_data', 'chw_form'));
+    }
+
+    public function add_task(Request  $request)
+    {
+        $tasks = new FormTask;
+        $tasks->user_id          = $request->user_id;
+        $tasks->assign_id        = $request->assign_id;
+        $tasks->notes        = $request->notes;
+        $tasks->follow_up_date        = $request->follow_up_date;
+        $tasks->save();
+        if (session(key: 'show_chw_form')) {
+            return redirect(session(key: 'show_chw_form'))->with('success', 'You have successfully setup the tasks for the form');
+        }
+    }
+
+    static function get_assign_data_detail($assign_id)
+    {
+        $assign_data_detail = FormTask::where('assign_id', $assign_id)->get();
+        return $assign_data_detail;
     }
 }

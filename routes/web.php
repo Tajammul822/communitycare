@@ -106,4 +106,5 @@ Route::post('form/share', [FormController::class, 'form_share'])->name('forms.sh
 //
 Route::get('chw/dashboard', [ChwController::class, 'dashboard'])->name('chw/dashboard');
 Route::get('chw/submitted-form', [ChwController::class, 'assign_form'])->name('chw/submitted-form');
-Route::get('chw/assign-details/{id}', [ChwController::class, 'assign_show'])->name('chw/assign-details/{id}');
+Route::get('chw/assign-details/{form_id}/{user_id}/{id}', [ChwController::class, 'assign_show'])->name('chw/assign-details/{form_id}/{user_id}/{id}');
+Route::post('chw/add-task', [ChwController::class, 'add_task'])->name('chw.task.add');

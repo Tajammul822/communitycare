@@ -40,7 +40,7 @@
                                         <td>{{ $form_data->assign_form->description }}</td>
                                         <td>{{ $form_data->created_at }}</td>
                                         <td>
-                                            <a href="{{ url('chw/assign-details/'.$form_data->form_id) }}"><i class="icon-eye" style="font-size:20px; color:#212529"></i></a>
+                                            <a href="{{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}"><i class="icon-eye" style="font-size:20px; color:#212529"></i></a>
                                             <a class="delete-confirm" href="{{url('admin/forms/edit/'.$form_data->id)}}"><i class="fa fa-trash" style="font-size:20px; color:#212529"></i></a>
                                         </td>
                                     </tr>

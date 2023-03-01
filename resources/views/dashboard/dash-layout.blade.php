@@ -151,14 +151,6 @@
                         </a>
                     </li>
                     @endif
-                    @if(Auth::user()->access_level == 2)
-                    <li class="nav-item" style="margin-bottom:5px">
-                        <a class="nav-link" href="{{ url('chw/submitted-form') }}" style="border:none">
-                            <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
-                            <span class="menu-title">Assigned Forms</span>
-                        </a>
-                    </li>
-                    @endif
 
                 </ul>
             </nav>
@@ -182,8 +174,6 @@
             @yield('chw-dashboard-content')
             @yield('chw-form-assign-content')
             @yield('chw-assign-show-content')
-
-
 
         </div>
         <!-- page-body-wrapper ends -->
