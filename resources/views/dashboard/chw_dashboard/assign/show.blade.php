@@ -123,6 +123,9 @@ use App\Http\Controllers\ChwController;
                             $assign_id = request()->route('id');
                             $user_id = request()->route('user_id');
                             ?>
+
+                            <input type="hidden" name="first_name" value="{{$assign_user->first_name}}">
+                            <input type="hidden" name="email" value="{{$assign_user->email}}">
                             <input type="hidden" name="assign_id" value="{{$assign_id}}">
                             <input type="hidden" name="user_id" value="{{$user_id}}">
                             <div class="form-group">

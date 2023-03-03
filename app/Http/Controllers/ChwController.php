@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminChwEmail;
+use App\Mail\FeedbackChw;
 use App\Models\ChwAssign;
 use App\Models\FormSubmit;
 use App\Models\FormSubmitAnswer;
@@ -11,6 +13,7 @@ use App\Models\FormTask;
 use Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ChwController extends Controller
 {
@@ -32,8 +35,20 @@ class ChwController extends Controller
         $user->zip_code        = $request->zip_code;
         $user->access_level        = $request->access_level;
         $user->password        = Hash::make($request->password);
+        $app_link = env("APP_URL") . '/login';
+        $sender_email = Auth::User()->email;
+
+        $chw_data = ([
+            'name' => $user->first_name,
+            'password' => $request->password,
+            'receiver_email' => $user->email,
+            'sender_email' => $sender_email,
+            'app_link' => $app_link
+        ]);
+
 
         if ($user->save()) {
+            $send = Mail::to($user->email)->send(new AdminChwEmail($chw_data));
             return redirect()->route('/admin/chw')->with('success', 'You have successfully added a CHW user!');
         } else {
             return redirect()->route('/admin/chw')->with('error', 'Sorry, Something went wrong');
@@ -116,7 +131,23 @@ class ChwController extends Controller
         $tasks->assign_id        = $request->assign_id;
         $tasks->notes        = $request->notes;
         $tasks->follow_up_date        = $request->follow_up_date;
+
+        $email = $request->email;
+        $name = $request->first_name;
+
+        $sender_name = Auth::User()->first_name;
+        $sender_email = Auth::User()->email;
+        $data = ([
+            'notes' => $request->notes,
+            'follow_up_date' => $request->follow_up_date,
+            'name' => $name,
+            'receiver_email' => $email,
+            'sender_name' => $sender_name,
+            'sender_email' => $sender_email
+        ]);
+
         $tasks->save();
+        $send = Mail::to($email)->send(new FeedbackChw($data));
         if (session(key: 'show_chw_form')) {
             return redirect(session(key: 'show_chw_form'))->with('success', 'You have successfully setup the tasks for the form');
         }

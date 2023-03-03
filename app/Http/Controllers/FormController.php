@@ -151,7 +151,7 @@ class FormController extends Controller
             'sender_email' => $sender_email,
             'form_link' => $form_link
         ]);
-        $send = Mail::to($email)->send(new NotifyMail($data));;
+        $send = Mail::to($email)->send(new NotifyMail($data));
         if ($send) {
             return redirect()->route('admin/forms')->with('success', 'You have successfully send the Form!');
         } else {
