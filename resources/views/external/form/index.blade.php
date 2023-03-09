@@ -24,11 +24,11 @@
 
 use App\Http\Controllers\FormController; ?>
 
-<div class="container">
+<div class="card-container" style="max-width:760px; margin:50px auto">
     <div class="row">
         <div class="col-md-12">
             <div class="mx-0 mx-sm-auto">
-                <div class="card" style="margin:30 300px;">
+                <div class="card">
                     <div class="card-header bg-primary">
                         <h5 class="card-title text-white mt-2" id="exampleModalLabel">Community Care Program interest</h5>
                     </div>

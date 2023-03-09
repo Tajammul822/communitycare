@@ -63,4 +63,43 @@ class FormSubmitController extends Controller
             return redirect()->route('admin/submitted-form')->with('error', 'Sorry, Something went wrong');
         };
     }
+
+    public function export($id)
+    {
+
+        $fileName = 'forms.csv';
+        $user_details = FormSubmit::where('id', $id)->first();
+        $id_form = $user_details->id;
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('User Name', 'Email', 'Phone', 'Zip Code', 'Best Describe', 'Language', 'Help', 'Submit Date', 'Questions', 'Answers');
+        $callback = function () use ($user_details, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            $row['User Name']    = $user_details->first_name . ' ' . $user_details->last_name;
+            $row['Email']    = $user_details->email;
+            $row['Phone']    = $user_details->phone;
+            $row['Zip Code']    = $user_details->zip_code;
+            $row['Best Describe']  = $user_details->best_describe;
+            $row['Language']  = $user_details->language;
+            $row['Help']  = $user_details->help;
+            $row['Submit Date']  = $user_details->created_at->diffForHumans();
+            fputcsv($file, array($row['User Name'], $row['Email'], $row['Phone'], $row['Zip Code'], $row['Best Describe'], $row['Language'], $row['Help'], $row['Submit Date']));
+
+            $question_answers = FormSubmitAnswer::where('form_submit_id', $user_details->id)->with('submit_question', 'submit_answer')->get();
+            foreach ($question_answers as $que_ans) {
+                $row['Questions']  = $que_ans->submit_question->question;
+                $row['Answers']  = $que_ans->submit_answer->answer;
+                fputcsv($file, array($row['Questions'], $row['Answers']));
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
 }

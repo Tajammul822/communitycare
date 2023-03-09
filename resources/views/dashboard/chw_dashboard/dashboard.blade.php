@@ -7,10 +7,23 @@ use App\Http\Controllers\ChwController;
 ?>
 <div class="main-panel">
     <div class="content-wrapper">
+        @if ( Session::get('success'))
+        <div class=" alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+        @endif
+        @if ( Session::get('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
+
                     <div class="card-body">
+                        <a href="{{ url('chw/export')}}" type="button" class="btn btn-info btn-fw" style="float:right">Export CSV</a>
+                        <!-- <a href="#" type="button" class="btn btn-warning btn-fw" style="float:right; margin-right:10px">Export PDF</a> -->
                         <h1 class="display-5"><strong>Client Task Management Module</strong></h1>
                         <p class="card-description">List of assigned Forms and Task details</p>
                     </div>
@@ -22,7 +35,6 @@ use App\Http\Controllers\ChwController;
             <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
                 <div class="card">
                     <div class="card-body">
-
                         <h3 class="card-title">{{ $form_data->assign_form->title }}</h3>
                         <a href="{{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}" type="button" class="btn btn-success" style="float:right">View Details</a>
                         <p class="card-description">{{ $form_data->assign_form->description }}</p>

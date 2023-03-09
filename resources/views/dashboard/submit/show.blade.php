@@ -59,7 +59,10 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
+
                     <div class="card-body">
+
+                        <!-- <a href="{{url('admin/form-export/'.$form_submit->id)}}" type="button" class="btn btn-info btn-fw" style="float:right">Export CSV</a> -->
                         <h4 class="card-title">Form Details</h4><br>
                         <p class="card-description"><strong>1: Which of the following best describes you? / ¿Cuál de las siguientes te describe mejor?</strong></p>
                         <blockquote class="blockquote">

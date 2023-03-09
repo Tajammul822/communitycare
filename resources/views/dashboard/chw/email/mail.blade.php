@@ -60,8 +60,8 @@
                     <table role="presentation" style="width:94%;max-width:600px;border:none;border-spacing:0;text-align:left;font-family:'Basier Circle', 'Roboto', 'Helvetica', 'Arial', sans-serif;font-size:1em;line-height:1.37em;color:#384049;">
                         <tr>
                             <td style="padding:40px 30px 30px 30px;text-align:center;font-size:1.5em;font-weight:bold;">
-                                <a href="http://dopplerhealth.com/" style="text-decoration:none;">
-                                    <img width="2170" alt="Doppler Health" style="width:2170px;max-width:80%;height:auto;border:none;text-decoration:none;color:#ffffff;" src="{{ url('assets/images/default-monochrome.svg') }}">
+                                <a href="#" style="text-decoration:none;">
+                                    <img src="{{ $chw_data['logo'] }}" width="2170" style="width:2170px;max-width:80%;height:auto;border:none;text-decoration:none;color:#ffffff">
                                 </a>
                             </td>
                         </tr>

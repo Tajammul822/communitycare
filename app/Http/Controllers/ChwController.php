@@ -14,6 +14,7 @@ use Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class ChwController extends Controller
 {
@@ -39,6 +40,7 @@ class ChwController extends Controller
         $sender_email = Auth::User()->email;
 
         $chw_data = ([
+            'logo' => 'http://3.144.233.206/assets/images/default-monochrome.svg',
             'name' => $user->first_name,
             'password' => $request->password,
             'receiver_email' => $user->email,
@@ -157,5 +159,40 @@ class ChwController extends Controller
     {
         $assign_data_detail = FormTask::where('assign_id', $assign_id)->get();
         return $assign_data_detail;
+    }
+
+    public function export_csv()
+    {
+
+        $fileName = 'chw_forms.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('User Name', 'Email', 'Phone', 'Zip Code', 'Submit Date');
+        $user_id = Auth::user()->id;
+        $assign = DB::table('chw_assigns as c')
+            ->leftJoin('form_submit as f', 'c.form_id', '=', 'f.form_id')
+            ->select('f.first_name AS first_name', 'f.last_name as last_name', 'f.email as email', 'f.phone as phone', 'f.zip_code as zip_code', 'f.created_at as created_at')
+            ->where('user_id', $user_id)->get();
+
+
+        $callback = function () use ($assign, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+            foreach ($assign as $user_details) {
+                $row['User Name']    = $user_details->first_name . ' ' . $user_details->last_name;
+                $row['Email']    = $user_details->email;
+                $row['Phone']    = $user_details->phone;
+                $row['Zip Code']    = $user_details->zip_code;
+                $row['Submit Date']  = $user_details->created_at;
+                fputcsv($file, array($row['User Name'], $row['Email'], $row['Phone'], $row['Zip Code'], $row['Submit Date']));
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
     }
 }

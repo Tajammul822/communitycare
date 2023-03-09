@@ -19,4 +19,9 @@ class ChwAssign extends Model
     {
         return $this->belongsTo(Form::class, 'form_id');
     }
+
+    public function assign_user_data()
+    {
+        return $this->hasMany(FormSubmit::class, 'form_id');
+    }
 }
