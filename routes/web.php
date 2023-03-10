@@ -88,7 +88,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/submitted-form', [FormSubmitController::class, 'index'])->name('admin/submitted-form');
     Route::get('admin/form-view/{id}', [FormSubmitController::class, 'show'])->name('admin/form-view/{id}');
     Route::post('/admin/chw-assign', [FormSubmitController::class, 'assign'])->name('assign.chw');
-    Route::get('admin/form-export/{id}', [FormSubmitController::class, 'export'])->name('admin/form-export/{id}');
+    Route::get('admin/export', [FormSubmitController::class, 'export_csv'])->name('admin/export');
+    Route::get('admin/export-pdf', [FormSubmitController::class, 'export_pdf'])->name('admin/export-pdf');
 });
 
 
@@ -110,3 +111,4 @@ Route::get('chw/submitted-form', [ChwController::class, 'assign_form'])->name('c
 Route::get('chw/assign-details/{form_id}/{user_id}/{id}', [ChwController::class, 'assign_show'])->name('chw/assign-details/{form_id}/{user_id}/{id}');
 Route::post('chw/add-task', [ChwController::class, 'add_task'])->name('chw.task.add');
 Route::get('chw/export', [ChwController::class, 'export_csv'])->name('chw/export');
+Route::get('chw/export-pdf', [ChwController::class, 'export_pdf'])->name('chw/export-pdf');

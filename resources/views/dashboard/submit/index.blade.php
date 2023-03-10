@@ -16,6 +16,16 @@
         </div>
         @endif
         <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url('admin/export')}}" type="button" class="btn btn-info btn-fw" style="float:right">Export CSV</a>
+                        <a href="{{ url('admin/export-pdf')}}" type="button" class="btn btn-warning btn-fw" style="float:right; margin-right:10px">Export PDF</a>
+                        <h1 class="display-5"><strong>Export</strong></h1>
+                        <p class="card-description">Get a list of all the submitted forms with the submitted user details in either CSV or PDF format.</p>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">

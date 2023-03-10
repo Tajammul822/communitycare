@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class ChwController extends Controller
 {
@@ -194,5 +195,24 @@ class ChwController extends Controller
             fclose($file);
         };
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function export_pdf()
+    {
+        $user_id = Auth::user()->id;
+        $pdf_data = DB::table('chw_assigns as c')
+            ->leftJoin('form_submit as f', 'c.form_id', '=', 'f.form_id')
+            ->select('f.first_name AS first_name', 'f.last_name as last_name', 'f.email as email', 'f.phone as phone', 'f.zip_code as zip_code', 'f.created_at as created_at')
+            ->where('user_id', $user_id)->get();
+
+        $data = [
+            'title' => 'Details of CHW assigned assessment forms user details',
+            'date' => date('m/d/Y'),
+            'pdf_data' => $pdf_data
+        ];
+
+        $pdf = PDF::loadView('dashboard.chw_dashboard.pdf', $data);
+
+        return $pdf->download('chw_forms.pdf');
     }
 }

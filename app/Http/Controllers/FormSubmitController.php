@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\FormAssignChw;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class FormSubmitController extends Controller
 {
@@ -64,13 +65,10 @@ class FormSubmitController extends Controller
         };
     }
 
-    public function export($id)
+    public function export_csv()
     {
 
-        $fileName = 'forms.csv';
-        $user_details = FormSubmit::where('id', $id)->first();
-        $id_form = $user_details->id;
-
+        $fileName = 'admin_forms.csv';
         $headers = array(
             "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
@@ -78,28 +76,39 @@ class FormSubmitController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columns = array('User Name', 'Email', 'Phone', 'Zip Code', 'Best Describe', 'Language', 'Help', 'Submit Date', 'Questions', 'Answers');
-        $callback = function () use ($user_details, $columns) {
+        $columns = array('User Name', 'Email', 'Phone', 'Zip Code', 'Submit Date');
+        $assign = FormSubmit::all();
+
+
+        $callback = function () use ($assign, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
-            $row['User Name']    = $user_details->first_name . ' ' . $user_details->last_name;
-            $row['Email']    = $user_details->email;
-            $row['Phone']    = $user_details->phone;
-            $row['Zip Code']    = $user_details->zip_code;
-            $row['Best Describe']  = $user_details->best_describe;
-            $row['Language']  = $user_details->language;
-            $row['Help']  = $user_details->help;
-            $row['Submit Date']  = $user_details->created_at->diffForHumans();
-            fputcsv($file, array($row['User Name'], $row['Email'], $row['Phone'], $row['Zip Code'], $row['Best Describe'], $row['Language'], $row['Help'], $row['Submit Date']));
-
-            $question_answers = FormSubmitAnswer::where('form_submit_id', $user_details->id)->with('submit_question', 'submit_answer')->get();
-            foreach ($question_answers as $que_ans) {
-                $row['Questions']  = $que_ans->submit_question->question;
-                $row['Answers']  = $que_ans->submit_answer->answer;
-                fputcsv($file, array($row['Questions'], $row['Answers']));
+            foreach ($assign as $user_details) {
+                $row['User Name']    = $user_details->first_name . ' ' . $user_details->last_name;
+                $row['Email']    = $user_details->email;
+                $row['Phone']    = $user_details->phone;
+                $row['Zip Code']    = $user_details->zip_code;
+                $row['Submit Date']  = $user_details->created_at;
+                fputcsv($file, array($row['User Name'], $row['Email'], $row['Phone'], $row['Zip Code'], $row['Submit Date']));
             }
             fclose($file);
         };
         return response()->stream($callback, 200, $headers);
+    }
+
+    public function export_pdf()
+    {
+
+        $pdf_data = FormSubmit::all();;
+
+        $data = [
+            'title' => 'Form submitted user details',
+            'date' => date('m/d/Y'),
+            'pdf_data' => $pdf_data
+        ];
+
+        $pdf = PDF::loadView('dashboard.submit.pdf', $data);
+
+        return $pdf->download('admin_forms.pdf');
     }
 }
