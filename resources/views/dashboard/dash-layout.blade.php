@@ -174,6 +174,7 @@
             @yield('chw-dashboard-content')
             @yield('chw-form-assign-content')
             @yield('chw-assign-show-content')
+            @yield('chw-search-content')
 
         </div>
         <!-- page-body-wrapper ends -->

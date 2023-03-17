@@ -1,5 +1,5 @@
 @extends('dashboard.dash-layout')
-@section('chw-dashboard-content')
+@section('chw-search-content')
 
 <?php
 
@@ -79,40 +79,33 @@ use App\Http\Controllers\ChwController;
             </div>
 
             @foreach($chw_form as $form_data)
-            <?php $assign_data =  ChwController::get_assign_data($form_data->id);
-            ?>
             <div class="col-md-12 grid-margin grid-margin-md-0 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">{{ $form_data->assign_form->title }}</h3>
+                        <h3 class="card-title">{{ $form_data->title }}</h3>
                         <a href=" {{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}" type="button" class="btn btn-success" style="float:right">View Details</a>
-                        <p class="card-description">{{ $form_data->assign_form->description }}</p>
+                        <p class="card-description">{{ $form_data->description }}</p>
 
                         <i class="icon-paper icon-md text-warning"></i>
                         <span><strong>Notes</strong></span><br><br>
-                        @foreach($assign_data as $data)
-                        @if(isset($data->notes)!= NULL)
+                        @if(isset($form_data->notes)!= NULL)
                         <ul class="list-ticked">
-                            <li>{{ $data->notes }}</li>
+                            <li>{{ $form_data->notes }}</li>
                         </ul>
                         @endif
-                        @endforeach
                         <i class="icon-clock icon-md text-success"></i>
                         <span><strong> Follow Up dates</strong></span><br><br>
-                        @foreach($assign_data as $data)
-                        @if(isset($data->follow_up_date)!= NULL)
+                        @if(isset($form_data->follow_up_date)!= NULL)
                         <ul class="list-star">
-                            <li>{{ @$data->follow_up_date }}</li>
+                            <li>{{ @$form_data->follow_up_date }}</li>
                         </ul>
                         @endif
-                        @endforeach
                         <!-- <i class="fa fa-phone icon-md text-info"></i>
                         <span><strong> Lorem ipsum dolor sit amet</strong></span> -->
                     </div>
                 </div>
             </div>
             @endforeach
-
         </div>
     </div>
 </div>

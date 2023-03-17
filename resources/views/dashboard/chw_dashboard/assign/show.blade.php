@@ -5,8 +5,6 @@
 
 use App\Http\Controllers\ChwController;
 ?>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <div class="main-panel">
     <div class="content-wrapper">
         @if ( Session::get('success'))
@@ -138,7 +136,7 @@ use App\Http\Controllers\ChwController;
                                 <strong>
                                     <p for="exampleFormControlTextarea1">Select a follow up date and time:</p>
                                 </strong>
-                                <input type="datetime-local" name="follow_up_date" class="form-control" placeholder="Select date and time">
+                                <input type="date" name="follow_up_date" class="form-control" placeholder="Select date and time">
 
                             </div>
                             <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save Task</button>
@@ -151,14 +149,6 @@ use App\Http\Controllers\ChwController;
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<script>
-    config = {
-        enableTime: true,
-        dateFormat: 'Y-m-d H:i:s',
-    }
-    flatpickr("input[type=datetime-local]", config);
-</script>
+
 
 @endsection

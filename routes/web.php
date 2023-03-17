@@ -112,3 +112,4 @@ Route::get('chw/assign-details/{form_id}/{user_id}/{id}', [ChwController::class,
 Route::post('chw/add-task', [ChwController::class, 'add_task'])->name('chw.task.add');
 Route::get('chw/export', [ChwController::class, 'export_csv'])->name('chw/export');
 Route::get('chw/export-pdf', [ChwController::class, 'export_pdf'])->name('chw/export-pdf');
+Route::post('chw/search', [ChwController::class, 'search'])->name('chw.searh');

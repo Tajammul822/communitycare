@@ -13,6 +13,7 @@ class FormTask extends Model
     protected $fillable = [
         'assign_id', 'user_id', 'notes', 'follow_up_date'
     ];
+    protected $dates = ['follow_up_date'];
 
     public function assign_task()
     {

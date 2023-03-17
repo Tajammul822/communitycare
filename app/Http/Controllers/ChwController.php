@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use PDF;
+use Illuminate\Support\Carbon;
 
 class ChwController extends Controller
 {
@@ -214,5 +215,18 @@ class ChwController extends Controller
         $pdf = PDF::loadView('dashboard.chw_dashboard.pdf', $data);
 
         return $pdf->download('chw_forms.pdf');
+    }
+
+    public function search(Request $request)
+    {
+        $id = Auth::user()->id;
+        $chw_form = DB::table('chw_assigns as c')
+            ->JOIN('form_tasks as f', 'c.id', '=', 'f.assign_id')
+            ->JOIN('forms as fo', 'fo.id', '=', 'c.form_id')
+            ->select('fo.title AS title', 'fo.description as description', 'c.id as id', 'c.user_id as user_id', 'c.form_id as form_id', 'f.notes as notes', 'f.follow_up_date as follow_up_date')
+            ->where(['f.follow_up_date' => $request->follow_up_date, 'f.user_id' => $id])->get();
+        // dd($chw_form);
+
+        return view('dashboard.chw_dashboard.search', compact('chw_form'));
     }
 }
