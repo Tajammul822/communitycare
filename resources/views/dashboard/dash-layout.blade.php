@@ -150,6 +150,12 @@
                             <span class="menu-title">Submitted Forms</span>
                         </a>
                     </li>
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="#" style="border:none">
+                            <i class="icon-file menu-icon" style="font-size:24px"></i>
+                            <span class="menu-title">Reports</span>
+                        </a>
+                    </li>
                     @endif
 
                 </ul>

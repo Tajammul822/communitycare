@@ -67,6 +67,55 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-6 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Newly Submitted Forms</h4>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-header-bg">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            User Name
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Phone
+                                        </th>
+                                        <th>
+                                            Submiited Date
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                    </tr>
+                                    <tr>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                    </tr>
+                                    <tr>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                        <td>static</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
