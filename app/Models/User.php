@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Question;
 use App\Models\Form;
+use App\Models\ChwAssign;
 
 class User extends Authenticatable
 {
@@ -53,5 +54,10 @@ class User extends Authenticatable
     public function questions()
     {
         return $this->hasMany(Question::class, 'user_id');
+    }
+
+    public function chw_assign_users()
+    {
+        return $this->has(ChwAssign::class, 'user_id');
     }
 }

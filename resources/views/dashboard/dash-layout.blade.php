@@ -181,6 +181,8 @@
             @yield('chw-form-assign-content')
             @yield('chw-assign-show-content')
             @yield('chw-search-content')
+            @yield('chw-assigned-dashboard-content')
+
 
         </div>
         <!-- page-body-wrapper ends -->

@@ -39,6 +39,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('users/edit/{id}', [App\Http\Controllers\UserController::class, 'change'])->name('users/edit/{id}');
     Route::post('users/edit/store', [App\Http\Controllers\UserController::class, 'alter'])->name('users.update');
     Route::get('admin/user-delete/{id}', [App\Http\Controllers\UserController::class, 'delete'])->name('admin/user-delete/{id}');
+    Route::get('admin/assigned-forms/{id}', [App\Http\Controllers\Auth\AuthController::class, 'forms_assigned'])->name('admin/assigned-forms/{id}');
 
 
 

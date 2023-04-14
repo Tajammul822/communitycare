@@ -76,39 +76,83 @@
                             <table class="table table-header-bg">
                                 <thead>
                                     <tr>
-                                        <th>
-                                            User Name
-                                        </th>
-                                        <th>
-                                            Email
-                                        </th>
-                                        <th>
-                                            Phone
-                                        </th>
-                                        <th>
-                                            Submiited Date
-                                        </th>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Submiited Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($form_submit as $data)
                                     <tr>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
+                                        <td>{{ $data->first_name }}</td>
+                                        <td>{{ $data->email }}</td>
+                                        <td>{{ $data->phone }}</td>
+                                        <td>{{ $data->created_at }}</td>
                                     </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">CHW User's with Assigned Forms</h4>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-header-bg">
+                                <thead>
                                     <tr>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Assigned Form</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($chw_users as $chw)
+
                                     <tr>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
-                                        <td>static</td>
+                                        <td>{{ $chw->first_name }}</td>
+                                        <td>{{ $chw->email }}</td>
+                                        <td>{{ $chw->phone }}</td>
+                                        <td><a href="{{url('admin/assigned-forms/'.$chw->id)}}"><i class="icon-eye" style="font-size:20px; color:#212529"></i></a></td>
                                     </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-lg-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Users Tasks For Follow Up</h4>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-header-bg">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Tasks/Notes</th>
+                                        <th>Follow Up Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($assigned_tasks as $task)
+                                    <tr>
+                                        <td>{{ $task->first_name }}</td>
+                                        <td>{{ $task->email }}</td>
+                                        <td>{{ $task->notes }}</td>
+                                        <td>{{ $task->follow_up_date }}</td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

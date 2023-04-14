@@ -85,7 +85,7 @@ use App\Http\Controllers\ChwController;
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">{{ $form_data->assign_form->title }}</h3>
-                        <a href=" {{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}" type="button" class="btn btn-success" style="float:right">View Details</a>
+                        <a href="{{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}" type="button" class="btn btn-success" style="float:right">View Details</a>
                         <p class="card-description">{{ $form_data->assign_form->description }}</p>
 
                         <i class="icon-paper icon-md text-warning"></i>

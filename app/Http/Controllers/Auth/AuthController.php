@@ -11,6 +11,9 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\Answer;
 use Hash;
+use App\Models\FormSubmit;
+use App\Models\ChwAssign;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -86,10 +89,22 @@ class AuthController extends Controller
             $userCount = User::count();
             $questionCount = Question::count();
             $answerCount = Answer::count();
-            return view('dashboard.dashboard', compact('userCount', 'questionCount', 'answerCount'));
+            $form_submit = FormSubmit::latest()->limit(5)->get();
+            $chw_users = User::where('access_level', 2)->get();
+            $assigned_tasks = DB::table('users as u')
+                ->JOIN('form_tasks as ft', 'u.id', '=', 'ft.user_id')
+                ->select('*')
+                ->where(['u.access_level' => 2])->get();
+            return view('dashboard.dashboard', compact('userCount', 'questionCount', 'answerCount', 'form_submit', 'chw_users', 'assigned_tasks'));
         }
 
         return redirect("login")->withSuccess('Opps! You do not have access');
+    }
+
+    public function forms_assigned($id)
+    {
+        $assigned_forms = ChwAssign::where('user_id', $id)->get();
+        return view('dashboard.chw_assigned.index', compact('assigned_forms'));
     }
 
     /**

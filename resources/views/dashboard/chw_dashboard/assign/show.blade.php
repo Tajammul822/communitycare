@@ -113,7 +113,7 @@ use App\Http\Controllers\ChwController;
                         @endforeach
                         @endforeach
                     </div>
-
+                    @if(auth()->user()->access_level == 2)
                     <div class="card-body">
                         <form action="{{ route('chw.task.add') }}" method="post">
                             @csrf
@@ -142,8 +142,9 @@ use App\Http\Controllers\ChwController;
                             <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save Task</button>
                         </form>
                     </div>
-
+                    @endif
                 </div>
+
             </div>
         </div>
     </div>
