@@ -9,7 +9,7 @@
           <div class="card-body">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
 
-              <h4>Edit User</h4>
+              <h4>Edit Client</h4>
               <form action="{{ route('users.update') }}" method="POST">
                 @csrf
                 <input type="hidden" name="user_id" value="{{@$data->id}}" />

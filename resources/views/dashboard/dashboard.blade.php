@@ -15,7 +15,7 @@
                     <div class="col-sm-12 grid-margin stretch-card" style="height:180px">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Users</h4>
+                                <h4 class="card-title">Clients</h4>
                                 <p>1% increase in registration</p>
                                 <h4 class="text-dark font-weight-bold mb-2">{{ $userCount }}</h4>
                                 <canvas id="customers"></canvas>
@@ -29,8 +29,8 @@
                     <div class="col-sm-12 grid-margin stretch-card" style="height:180px">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Forms</h4>
-                                <p>1% increase in form submission</p>
+                                <h4 class="card-title">Submissions</h4>
+                                <p>1% increase in submissions</p>
                                 <h4 class="text-dark font-weight-bold mb-2">04</h4>
                                 <canvas id="orders"></canvas>
                             </div>
@@ -71,12 +71,12 @@
             <div class="col-lg-6 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Newly Submitted Forms</h4>
+                        <h4 class="card-title">Newly Submitted Submissions</h4>
                         <div class="table-responsive mt-3">
                             <table class="table table-header-bg">
                                 <thead>
                                     <tr>
-                                        <th>User Name</th>
+                                        <th>Client Name</th>
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Submiited Date</th>
@@ -101,7 +101,7 @@
             <div class="col-lg-6 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">CHW User's with Assigned Forms</h4>
+                        <h4 class="card-title">CHW User's with Assigned Submissions</h4>
                         <div class="table-responsive mt-3">
                             <table class="table table-header-bg">
                                 <thead>
@@ -129,6 +129,7 @@
                 </div>
             </div>
         </div><br><br>
+
         <div class="row">
             <div class="col-lg-12 stretch-card">
                 <div class="card">
@@ -162,6 +163,5 @@
         </div>
 
     </div>
-
 </div>
 @endsection

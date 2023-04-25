@@ -22,14 +22,14 @@
                         <a href="{{ url('admin/export')}}" type="button" class="btn btn-info btn-fw" style="float:right">Export CSV</a>
                         <a href="{{ url('admin/export-pdf')}}" type="button" class="btn btn-warning btn-fw" style="float:right; margin-right:10px">Export PDF</a>
                         <h1 class="display-5"><strong>Export</strong></h1>
-                        <p class="card-description">Get a list of all the submitted forms with the submitted user details in either CSV or PDF format.</p>
+                        <p class="card-description">Get a list of all the submitted submissions with the submitted user details in either CSV or PDF format.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Submitted Form List</h4>
+                        <h4 class="card-title">Submitted Submission List</h4>
                         <div class="table-responsive pt-3">
                             <table class="table table-bordered" id="user_table">
                                 <thead>
@@ -77,7 +77,7 @@
         const url = $(this).attr('href');
         swal({
             title: 'Are you sure?',
-            text: "This User and it's details will be permanently deleted!",
+            text: "This Client with its submission will be permanently deleted!",
             icon: 'warning',
             buttons: ["Cancel", "Yes!"],
         }).then(function(value) {

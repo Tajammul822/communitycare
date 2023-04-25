@@ -8,7 +8,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4><strong>Edit Form</strong></h4>
+                        <h4><strong>Change Submission Question</strong></h4>
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
 
                             <form action="{{ route('forms.questions.update') }}" method="POST">

@@ -21,7 +21,7 @@ use App\Http\Controllers\ChwController;
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">User Details</h3><br>
+                        <h3 class="card-title">Client Details</h3><br>
                         <div class="row">
                             <div class="col-md-3 d-flex align-items-center">
                                 <div class="d-flex flex-row align-items-center">
@@ -64,7 +64,7 @@ use App\Http\Controllers\ChwController;
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Form Details</h4><br>
+                        <h4 class="card-title">Submission Details</h4><br>
                         <p class="card-description"><strong>1: Which of the following best describes you? / ¿Cuál de las siguientes te describe mejor?</strong></p>
                         <blockquote class="blockquote">
                             <p class="mb-0">{{$assign_user->best_describe}}</>

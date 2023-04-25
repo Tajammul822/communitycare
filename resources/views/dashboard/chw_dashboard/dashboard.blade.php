@@ -57,7 +57,7 @@ use App\Http\Controllers\ChwController;
                         <a href="{{ url('chw/export')}}" type="button" class="btn btn-info btn-fw" style="float:right">Export CSV</a>
                         <a href="{{ url('chw/export-pdf')}}" type="button" class="btn btn-warning btn-fw" style="float:right; margin-right:10px">Export PDF</a>
                         <h1 class="display-5"><strong>Client Task Management Module</strong></h1>
-                        <p class="card-description">List of assigned Forms and Task details</p>
+                        <p class="card-description">List of assigned Submissions and Task details</p>
                     </div>
                 </div>
             </div>

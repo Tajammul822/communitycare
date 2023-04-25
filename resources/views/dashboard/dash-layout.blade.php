@@ -117,7 +117,7 @@
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('/user') }}" style="border:none">
                             <i class="icon-head menu-icon"></i>
-                            <span class="menu-title">Users</span>
+                            <span class="menu-title">Clients</span>
                         </a>
                     </li>
                     <li class="nav-item" style="margin-bottom:5px">
@@ -141,13 +141,13 @@
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('admin/forms') }}" style="border:none">
                             <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
-                            <span class="menu-title">Forms</span>
+                            <span class="menu-title">Submissions</span>
                         </a>
                     </li>
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('admin/submitted-form') }}" style="border:none">
                             <i class="icon-paper-stack menu-icon" style="font-size:24px"></i>
-                            <span class="menu-title">Submitted Forms</span>
+                            <span class="menu-title">Submitted <br> Submissions</span>
                         </a>
                     </li>
                     <li class="nav-item" style="margin-bottom:5px">

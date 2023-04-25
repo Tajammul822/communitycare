@@ -20,7 +20,7 @@
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Form Answers</h3>
+                        <h3 class="card-title">Submission Answers</h3>
                         <span class="">
                             <button class="btn btn-info btn-block btn-sm col-sm-2 float-right" type="button" id="new_member" data-toggle="modal" data-target="#exampleModal">Add Answer</button>
                         </span>
@@ -126,7 +126,7 @@
         const url = $(this).attr('href');
         swal({
             title: 'Are you sure?',
-            text: "This Answer and it's details will be permanently deleted!",
+            text: "This Submission's Answer and it's details will be permanently deleted!",
             icon: 'warning',
             buttons: ["Cancel", "Yes!"],
         }).then(function(value) {

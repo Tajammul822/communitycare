@@ -19,7 +19,7 @@
             <div class="col-lg-12 stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">Forms</h3>
+                        <h3 class="card-title">All Submissions</h3>
                         <span class="">
                             <button class="btn btn-info btn-block btn-sm col-sm-2 float-right" type="button" id="new_member" data-toggle="modal" data-target="#exampleModal">New</button>
                         </span>
@@ -66,7 +66,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#212529">
-                <h5 class="modal-title">Add a New Form</h5>
+                <h5 class="modal-title">Add a New Submission</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <button class="btn btn-info" type="submit" name="add_new">Save Form</button>
+                                    <button class="btn btn-info" type="submit" name="add_new">Save Submission</button>
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                         </div>
@@ -113,7 +113,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#212529">
-                <h5 class="modal-title">Share this Form</h5>
+                <h5 class="modal-title">Share this Submission</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -167,7 +167,7 @@
         const url = $(this).attr('href');
         swal({
             title: 'Are you sure?',
-            text: "This Form and it's details will be permanently deleted!",
+            text: "This Submission and it's details will be permanently deleted!",
             icon: 'warning',
             buttons: ["Cancel", "Yes!"],
         }).then(function(value) {

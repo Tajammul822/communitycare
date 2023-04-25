@@ -19,7 +19,7 @@
       <div class="col-lg-12 stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Users Record</h4>
+            <h4 class="card-title">Client Records</h4>
             <span class="">
               <button class="btn btn-info btn-block btn-sm col-sm-2 float-right" type="button" id="new_member" data-toggle="modal" data-target="#exampleModal">
                 <svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
@@ -68,7 +68,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#212529">
-        <h5 class="modal-title">Add new User</h5>
+        <h5 class="modal-title">Add new Client</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -168,7 +168,7 @@
                   </div>
                 </div>
                 <div class="col-md-6" style="border:none">
-                  <button class="btn btn-info" type="submit" name="add_new">Save User</button>
+                  <button class="btn btn-info" type="submit" name="add_new">Save Client</button>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -194,7 +194,7 @@
     const url = $(this).attr('href');
     swal({
       title: 'Are you sure?',
-      text: "This User and it's details will be permanently deleted!",
+      text: "This Client and it's details will be permanently deleted!",
       icon: 'warning',
       buttons: ["Cancel", "Yes!"],
     }).then(function(value) {
