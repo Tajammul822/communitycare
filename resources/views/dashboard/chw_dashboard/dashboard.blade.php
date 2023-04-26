@@ -87,27 +87,6 @@ use App\Http\Controllers\ChwController;
                         <h3 class="card-title">{{ $form_data->assign_form->title }}</h3>
                         <a href="{{ url('chw/assign-details/'.$form_data->form_id).'/'.$form_data->user_id.'/'.$form_data->id}}" type="button" class="btn btn-success" style="float:right">View Details</a>
                         <p class="card-description">{{ $form_data->assign_form->description }}</p>
-
-                        <i class="icon-paper icon-md text-warning"></i>
-                        <span><strong>Notes</strong></span><br><br>
-                        @foreach($assign_data as $data)
-                        @if(isset($data->notes)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ $data->notes }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <i class="icon-clock icon-md text-success"></i>
-                        <span><strong> Follow Up dates</strong></span><br><br>
-                        @foreach($assign_data as $data)
-                        @if(isset($data->follow_up_date)!= NULL)
-                        <ul class="list-star">
-                            <li>{{ @$data->follow_up_date }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <!-- <i class="fa fa-phone icon-md text-info"></i>
-                        <span><strong> Lorem ipsum dolor sit amet</strong></span> -->
                     </div>
                 </div>
             </div>

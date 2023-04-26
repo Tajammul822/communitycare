@@ -130,11 +130,18 @@ class ChwController extends Controller
 
     public function add_task(Request  $request)
     {
+
         $tasks = new FormTask;
         $tasks->user_id          = $request->user_id;
         $tasks->assign_id        = $request->assign_id;
-        $tasks->notes        = $request->notes;
-        $tasks->follow_up_date        = $request->follow_up_date;
+        $tasks->primary_need        = $request->primary_need;
+        $tasks->first_engage        = $request->first_engage;
+        $tasks->housing        = $request->housing;
+        $tasks->family_situation        = $request->family_situation;
+        $tasks->emp_edu        = $request->emp_edu;
+        $tasks->barr_con        = $request->barr_con;
+        $tasks->res_ref        = $request->res_ref;
+        $tasks->supp_date        = $request->supp_date;
 
         $email = $request->email;
         $name = $request->first_name;
@@ -142,8 +149,8 @@ class ChwController extends Controller
         $sender_name = Auth::User()->first_name;
         $sender_email = Auth::User()->email;
         $data = ([
-            'notes' => $request->notes,
-            'follow_up_date' => $request->follow_up_date,
+            'notes' => $request->primary_need,
+            'follow_up_date' => $request->first_engage,
             'name' => $name,
             'receiver_email' => $email,
             'sender_name' => $sender_name,
@@ -223,8 +230,8 @@ class ChwController extends Controller
         $chw_form = DB::table('chw_assigns as c')
             ->JOIN('form_tasks as f', 'c.id', '=', 'f.assign_id')
             ->JOIN('forms as fo', 'fo.id', '=', 'c.form_id')
-            ->select('fo.title AS title', 'fo.description as description', 'c.id as id', 'c.user_id as user_id', 'c.form_id as form_id', 'f.notes as notes', 'f.follow_up_date as follow_up_date')
-            ->where(['f.follow_up_date' => $request->follow_up_date, 'f.user_id' => $id])->get();
+            ->select('fo.title AS title', 'fo.description as description', 'c.id as id', 'c.user_id as user_id', 'c.form_id as form_id', 'f.primary_need as primary_need', 'f.first_engage as first_engage')
+            ->where(['f.first_engage' => $request->follow_up_date, 'f.user_id' => $id])->get();
         // dd($chw_form);
 
         return view('dashboard.chw_dashboard.search', compact('chw_form'));

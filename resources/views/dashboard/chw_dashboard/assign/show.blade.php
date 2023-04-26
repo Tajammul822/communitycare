@@ -87,27 +87,75 @@ use App\Http\Controllers\ChwController;
                         <blockquote class="blockquote">
                             <p class="mb-0">{{$question_data->submit_answer->answer}}</>
                             </p>
-                        </blockquote>
+                        </blockquote><br><br>
                         @endforeach
                         @foreach($chw_form as $form_data)
                         <?php $assign_data_detail =  ChwController::get_assign_data_detail($form_data->id);
                         ?>
+                        <h5 style="text-align:center"><strong>Tasks/Info Added to this Submission</strong></h5><br><br>
 
-                        <i class="icon-paper icon-md text-warning"></i>
-                        <span><strong>Notes</strong></span><br><br>
+                        <span><strong>Primary Need</strong></span><br>
                         @foreach($assign_data_detail as $data)
-                        @if(isset($data->notes)!= NULL)
+                        @if(isset($data->primary_need)!= NULL)
                         <ul class="list-ticked">
-                            <li>{{ $data->notes }}</li>
+                            <li>{{ $data->primary_need }}</li>
                         </ul>
                         @endif
                         @endforeach
-                        <i class="icon-clock icon-md text-success"></i>
-                        <span><strong>Follow Up Routine</strong></span><br><br>
+                        <span><strong>FIRST ENGAGEMENT (date)</strong></span><br><br>
                         @foreach($assign_data_detail as $data)
-                        @if(isset($data->follow_up_date)!= NULL)
-                        <ul class="list-star">
-                            <li>{{ @$data->follow_up_date }}</li>
+                        @if(isset($data->first_engage)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->first_engage }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+
+                        <span><strong>Current housing</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->housing)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->housing }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <span><strong>Current family situation</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->family_situation)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->family_situation }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <span><strong>Current employment / education</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->emp_edu)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->emp_edu }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <span><strong>Other barriers / concerns</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->barr_con)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->barr_con }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <span><strong>RESOURCES / REFERRAL GIVEN</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->res_ref)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->res_ref }}</li>
+                        </ul>
+                        @endif
+                        @endforeach
+                        <span><strong>SUPPLIES LAST GIVEN (date)</strong></span><br><br>
+                        @foreach($assign_data_detail as $data)
+                        @if(isset($data->supp_date)!= NULL)
+                        <ul class="list-ticked">
+                            <li>{{ @$data->supp_date }}</li>
                         </ul>
                         @endif
                         @endforeach
@@ -115,6 +163,7 @@ use App\Http\Controllers\ChwController;
                     </div>
                     @if(auth()->user()->access_level == 2)
                     <div class="card-body">
+                        <h5 style="text-align:center"><strong>Add Tasks to this Submission</strong></h5><br><br>
                         <form action="{{ route('chw.task.add') }}" method="post">
                             @csrf
                             <?php
@@ -126,19 +175,64 @@ use App\Http\Controllers\ChwController;
                             <input type="hidden" name="email" value="{{$assign_user->email}}">
                             <input type="hidden" name="assign_id" value="{{$assign_id}}">
                             <input type="hidden" name="user_id" value="{{$user_id}}">
+                            <div class="form-group col-md-3">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">CLIENT ENGAGED THROUGH:<br><br>FIRST ENGAGEMENT (date):</p>
+                                </strong>
+                                <input type="date" name="first_engage" class="form-control" placeholder="Select date and time">
+
+                            </div>
                             <div class="form-group">
                                 <strong>
-                                    <p for="exampleFormControlTextarea1">Write Notes if any:</p>
+                                    <p for="exampleFormControlTextarea1">PRIMARY NEED:</p>
                                 </strong>
-                                <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                <input type="text" name="primary_need" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">CLIENT
+                                        Special information**:<br><br>
+                                        Current housing:</p>
+                                </strong>
+                                <input type="text" name="housing" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">Current family situation:</p>
+                                </strong>
+                                <input type="text" name="family_situation" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">Current employment / education:</p>
+                                </strong>
+                                <input type="text" name="emp_edu" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">Other barriers / concerns:</p>
+                                </strong>
+                                <input type="text" name="barr_con" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
+                            </div>
+                            <div class="form-group">
+                                <strong>
+                                    <p for="exampleFormControlTextarea1">RESOURCES / REFERRAL GIVEN:</p>
+                                </strong>
+                                <input type="text" name="res_ref" class="form-control" />
+                                <!-- <textarea name="notes" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea> -->
                             </div>
                             <div class="form-group col-md-3">
                                 <strong>
-                                    <p for="exampleFormControlTextarea1">Select a follow up date and time:</p>
+                                    <p for="exampleFormControlTextarea1"> SUPPLIES LAST GIVEN (date):</p>
                                 </strong>
-                                <input type="date" name="follow_up_date" class="form-control" placeholder="Select date and time">
-
+                                <input type="date" name="supp_date" class="form-control" placeholder="Select date and time">
                             </div>
+
                             <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save Task</button>
                         </form>
                     </div>
@@ -147,9 +241,7 @@ use App\Http\Controllers\ChwController;
 
             </div>
         </div>
+
     </div>
 </div>
-
-
-
 @endsection

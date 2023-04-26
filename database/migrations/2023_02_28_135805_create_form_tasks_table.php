@@ -17,8 +17,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('assign_id');
-            $table->string('notes');
-            $table->dateTime('follow_up_date')->nullable();
+            $table->string('primary_need')->nullable();
+            $table->date('first_engage')->nullable();
+            $table->string('housing')->nullable();
+            $table->string('family_situation')->nullable();
+            $table->string('emp_edu')->nullable();
+            $table->string('barr_con')->nullable();
+            $table->string('res_ref')->nullable();
+            $table->date('supp_date')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')
