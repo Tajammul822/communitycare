@@ -182,6 +182,8 @@
             @yield('chw-assign-show-content')
             @yield('chw-search-content')
             @yield('chw-assigned-dashboard-content')
+            @yield('chw-assign-task-content')
+
 
 
         </div>

@@ -141,8 +141,8 @@
                                     <tr>
                                         <th>User Name</th>
                                         <th>Email</th>
-                                        <th>Tasks/Notes</th>
-                                        <th>Follow Up Date</th>
+                                        <th>Tasks/Info</th>
+                                        <th>First Engagement date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -150,8 +150,8 @@
                                     <tr>
                                         <td>{{ $task->first_name }}</td>
                                         <td>{{ $task->email }}</td>
-                                        <td>{{ $task->notes }}</td>
-                                        <td>{{ $task->follow_up_date }}</td>
+                                        <td>{{ $task->primary_need }}</td>
+                                        <td>{{ $task->first_engage }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

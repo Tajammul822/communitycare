@@ -92,78 +92,16 @@ use App\Http\Controllers\ChwController;
                         @foreach($chw_form as $form_data)
                         <?php $assign_data_detail =  ChwController::get_assign_data_detail($form_data->id);
                         ?>
-                        <h5 style="text-align:center"><strong>Tasks/Info Added to this Submission</strong></h5><br><br>
-
-                        <span><strong>Primary Need</strong></span><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->primary_need)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ $data->primary_need }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>FIRST ENGAGEMENT (date)</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->first_engage)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->first_engage }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-
-                        <span><strong>Current housing</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->housing)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->housing }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>Current family situation</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->family_situation)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->family_situation }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>Current employment / education</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->emp_edu)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->emp_edu }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>Other barriers / concerns</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->barr_con)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->barr_con }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>RESOURCES / REFERRAL GIVEN</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->res_ref)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->res_ref }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
-                        <span><strong>SUPPLIES LAST GIVEN (date)</strong></span><br><br>
-                        @foreach($assign_data_detail as $data)
-                        @if(isset($data->supp_date)!= NULL)
-                        <ul class="list-ticked">
-                            <li>{{ @$data->supp_date }}</li>
-                        </ul>
-                        @endif
-                        @endforeach
                         @endforeach
                     </div>
                     @if(auth()->user()->access_level == 2)
                     <div class="card-body">
                         <h5 style="text-align:center"><strong>Add Tasks to this Submission</strong></h5><br><br>
+                        <?php
+                        $assign_id = request()->route('id');
+                        $user_id = request()->route('user_id');
+                        ?>
+                        <a href="{{ url('chw/view-tasks/'.$assign_id.'/'.$user_id)}}" type="button" class="btn btn-success btn-fw" style="float:right; margin-right:10px">View Tasks</a>
                         <form action="{{ route('chw.task.add') }}" method="post">
                             @csrf
                             <?php

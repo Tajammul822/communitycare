@@ -236,4 +236,10 @@ class ChwController extends Controller
 
         return view('dashboard.chw_dashboard.search', compact('chw_form'));
     }
+
+    public function view_tasks($assign_id, $user_id)
+    {
+        $tasks = FormTask::where('assign_id', $assign_id)->get();
+        return view('dashboard.chw_dashboard.assign.task', compact('tasks'));
+    }
 }
