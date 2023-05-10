@@ -183,6 +183,14 @@
             @yield('chw-search-content')
             @yield('chw-assigned-dashboard-content')
             @yield('chw-assign-task-content')
+            @yield('chw-phase1-content')
+            @yield('chw-phase2-content')
+            @yield('phase-one-show-content')
+            @yield('phase-two-show-content')
+
+
+
+
 
 
 

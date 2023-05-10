@@ -65,6 +65,7 @@ class ChwController extends Controller
         return view('dashboard.chw.edit', $data);
     }
 
+
     public function update(Request  $request)
     {
         $id = $request->user_id;
