@@ -113,14 +113,6 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    @if(Auth::user()->access_level == 2)
-                    <li class="nav-item" style="margin-bottom:5px">
-                        <a class="nav-link" href="{{ url('chw/phases') }}" style="border:none">
-                            <i class="icon-stack menu-icon"></i>
-                            <span class="menu-title">Phases</span>
-                        </a>
-                    </li>
-                    @endif
                     @if(Auth::user()->access_level == 1)
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('/user') }}" style="border:none">

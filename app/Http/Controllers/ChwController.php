@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Support\Carbon;
+use App\Models\FormAction;
 
 class ChwController extends Controller
 {
@@ -123,10 +124,13 @@ class ChwController extends Controller
         $assign_user = FormSubmit::where('form_id', $form_id)->first();
         $form_submit_id = $assign_user->id;
         $assign_data = FormSubmitAnswer::where('form_submit_id', $form_submit_id)->get();
+        $one_actions = FormAction::where('assign_id', $id)->where('user_id', $user_id)->where('phase', 1)->get();
+        $two_actions = FormAction::where('assign_id', $id)->where('user_id', $user_id)->where('phase', 2)->get();
 
+        $first_engage = DB::table('form_tasks')->select('first_engage')->where('assign_id', $id)->where('user_id', $user_id)->get();
         Session::put('show_chw_form', request()->fullUrl());
 
-        return view('dashboard.chw_dashboard.assign.show', compact('assign_user', 'assign_data', 'chw_form'));
+        return view('dashboard.chw_dashboard.assign.show', compact('assign_user', 'assign_data', 'chw_form', 'one_actions', 'two_actions', 'first_engage'));
     }
 
     public function add_task(Request  $request)

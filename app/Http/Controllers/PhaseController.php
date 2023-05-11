@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\ChwAssign;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\ChwController;
 
 class PhaseController extends Controller
 {
@@ -33,13 +34,16 @@ class PhaseController extends Controller
 
         $first_engage = DB::table('form_tasks')->select('first_engage')->where('assign_id', $assign_id)->where('user_id', $user_id)->get();
 
-        return view('dashboard.chw_dashboard.phase.show', compact('one_actions', 'two_actions', 'first_engage'));
+        return view('dashboard.chw_dashboard.assign.show', compact('one_actions', 'two_actions', 'first_engage'));
     }
 
 
     public function add_phase_one(Request $request)
     {
-
+        // echo $request->form_id;
+        // echo $request->user_id;
+        // echo $request->assign_id;
+        // exit;
         $actions = new FormAction();
         $actions->user_id          = $request->user_id;
         $actions->assign_id          = $request->assign_id;
@@ -49,7 +53,7 @@ class PhaseController extends Controller
 
         $actions->save();
 
-        return redirect()->action([PhaseController::class, 'show_phase_content'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
+        return redirect()->action([ChwController::class, 'assign_show'], ['form_id' =>  $request->form_id, 'user_id' => $request->user_id, 'id' => $request->assign_id])
             ->with('success', 'You have successfully setup the actions for the submission in phase I');
     }
 
@@ -65,7 +69,7 @@ class PhaseController extends Controller
 
         $actions->save();
 
-        return redirect()->action([PhaseController::class, 'show_phase_content'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
+        return redirect()->action([ChwController::class, 'assign_show'], ['form_id' =>  $request->form_id, 'user_id' => $request->user_id, 'id' => $request->assign_id])
             ->with('success', 'You have successfully setup the actions for the submission in phase II');
     }
 }
