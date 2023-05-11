@@ -116,8 +116,9 @@ Route::get('chw/export', [ChwController::class, 'export_csv'])->name('chw/export
 Route::get('chw/export-pdf', [ChwController::class, 'export_pdf'])->name('chw/export-pdf');
 Route::post('chw/search', [ChwController::class, 'search'])->name('chw.searh');
 Route::get('chw/view-tasks/{assign_id}/{user_id}', [ChwController::class, 'view_tasks'])->name('chw/assign-details/{assign_id}/{user_id}');
-Route::post('chw/select-phase', [PhaseController::class, 'select_phase'])->name('phase.post');
+
+//phase routes
+Route::get('chw/phases', [PhaseController::class, 'phase'])->name('chw/phases');
+Route::get('chw/phase-show/{user_id}/{assign_id}', [PhaseController::class, 'show_phase_content'])->name('chw/phase-show/{user_id}/{assign_id}');
 Route::post('chw/add-phase1', [PhaseController::class, 'add_phase_one'])->name('phase.one.post');
-Route::get('chw/phase-one-actions/{assign_id}/{user_id}', [PhaseController::class, 'phase_one_actions'])->name('chw/phase-one-actions/{assign_id}/{user_id}');
 Route::post('chw/add-phase2', [PhaseController::class, 'add_phase_two'])->name('phase.two.post');
-Route::get('chw/phase-two-actions/{assign_id}/{user_id}', [PhaseController::class, 'phase_two_actions'])->name('chw/phase-two-actions/{assign_id}/{user_id}');

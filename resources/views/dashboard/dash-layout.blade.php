@@ -113,6 +113,14 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
+                    @if(Auth::user()->access_level == 2)
+                    <li class="nav-item" style="margin-bottom:5px">
+                        <a class="nav-link" href="{{ url('chw/phases') }}" style="border:none">
+                            <i class="icon-stack menu-icon"></i>
+                            <span class="menu-title">Phases</span>
+                        </a>
+                    </li>
+                    @endif
                     @if(Auth::user()->access_level == 1)
                     <li class="nav-item" style="margin-bottom:5px">
                         <a class="nav-link" href="{{ url('/user') }}" style="border:none">
@@ -180,9 +188,11 @@
             @yield('chw-dashboard-content')
             @yield('chw-form-assign-content')
             @yield('chw-assign-show-content')
+            @yield('chw-phase-main-content')
             @yield('chw-search-content')
             @yield('chw-assigned-dashboard-content')
             @yield('chw-assign-task-content')
+            @yield('chw-dashboard-phase-content')
             @yield('chw-phase1-content')
             @yield('chw-phase2-content')
             @yield('phase-one-show-content')

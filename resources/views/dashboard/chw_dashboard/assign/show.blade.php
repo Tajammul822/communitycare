@@ -170,7 +170,7 @@ use App\Http\Controllers\ChwController;
                                 </strong>
                                 <input type="date" name="supp_date" class="form-control" placeholder="Select date and time">
                             </div>
-                            <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save Task</button>
+                            <button type="submit" name="submit" class="btn btn-success btn-rounded btn-fw" style="float:right">Save</button>
                         </form>
                     </div>
                     @endif
@@ -178,35 +178,6 @@ use App\Http\Controllers\ChwController;
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Select any one phase to add actions</h3><br>
-                        <form action="{{ route('phase.post') }}" method="POST" id="additional-info-form">
-                            @csrf
-                            <input type="hidden" name="assign_id" value="{{$assign_id}}">
-                            <input type="hidden" name="user_id" value="{{$user_id}}">
-                            <div class="row">
-                                <div class="col-lg-6 form-group">
-                                    <label for="exampleFormControlSelect1"><strong>Select Phase</strong></label>
-                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="phase_name">
-                                        <option value="1">Phase 1</option>
-                                        <option value="2">Phase 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 form-group">
-                                <button type="submit" class="btn btn-block btn-info" style="float:right">
-                                    Select
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 @endsection

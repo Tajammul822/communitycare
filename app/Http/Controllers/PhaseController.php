@@ -6,22 +6,36 @@ use App\Models\FormAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+use App\Models\ChwAssign;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class PhaseController extends Controller
 {
-    public function select_phase(Request $request)
+
+
+
+    public function phase(Request $request)
     {
-        $user_id = $request->user_id;
-        $assign_id = $request->assign_id;
 
-        Session::put('show_phase_add', request()->fullUrl());
+        $id = Auth::user()->id;
+        $chw_users = User::where('access_level', 2)->get();
+        $chw_form = ChwAssign::where('user_id', $id)->get();
 
-        if ($request->phase_name == 1) {
-            return view('dashboard.chw_dashboard.phase.phase1.index', compact('user_id', 'assign_id'));
-        } else {
-            return view('dashboard.chw_dashboard.phase.phase2.index', compact('user_id', 'assign_id'));
-        }
+        return view('dashboard.chw_dashboard.phase.index', compact('chw_users', 'chw_form'));
     }
+
+    public function show_phase_content($user_id, $assign_id)
+    {
+        $one_actions = FormAction::where('assign_id', $assign_id)->where('user_id', $user_id)->where('phase', 1)->get();
+        $two_actions = FormAction::where('assign_id', $assign_id)->where('user_id', $user_id)->where('phase', 2)->get();
+
+        $first_engage = DB::table('form_tasks')->select('first_engage')->where('assign_id', $assign_id)->where('user_id', $user_id)->get();
+
+        return view('dashboard.chw_dashboard.phase.show', compact('one_actions', 'two_actions', 'first_engage'));
+    }
+
 
     public function add_phase_one(Request $request)
     {
@@ -35,17 +49,8 @@ class PhaseController extends Controller
 
         $actions->save();
 
-        return redirect()->action([PhaseController::class, 'phase_one_actions'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
-            ->with('success', 'You have successfully setup the actions for the submission');
-    }
-
-    public function phase_one_actions($assign_id, $user_id)
-    {
-
-        $one_actions = FormAction::where('assign_id', $assign_id)->where('user_id', $user_id)->where('phase', 1)->get();
-        Session::put('show_phase_one', request()->fullUrl());
-
-        return view('dashboard.chw_dashboard.phase.phase1.show', compact('one_actions'));
+        return redirect()->action([PhaseController::class, 'show_phase_content'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
+            ->with('success', 'You have successfully setup the actions for the submission in phase I');
     }
 
     public function add_phase_two(Request $request)
@@ -60,16 +65,7 @@ class PhaseController extends Controller
 
         $actions->save();
 
-        return redirect()->action([PhaseController::class, 'phase_two_actions'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
-            ->with('success', 'You have successfully setup the actions for the submission');
-    }
-
-    public function phase_two_actions($assign_id, $user_id)
-    {
-
-        $two_actions = FormAction::where('assign_id', $assign_id)->where('user_id', $user_id)->where('phase', 2)->get();
-        Session::put('show_phase_two', request()->fullUrl());
-
-        return view('dashboard.chw_dashboard.phase.phase2.show', compact('two_actions'));
+        return redirect()->action([PhaseController::class, 'show_phase_content'], ['assign_id' =>  $request->assign_id, 'user_id' => $request->user_id])
+            ->with('success', 'You have successfully setup the actions for the submission in phase II');
     }
 }
