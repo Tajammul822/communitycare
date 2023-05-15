@@ -5,6 +5,13 @@
 
 use App\Http\Controllers\ChwController;
 ?>
+<style>
+    #data_1,
+    #data_2,
+    #data_3 {
+        display: none;
+    }
+</style>
 <div class="main-panel">
     <div class="content-wrapper">
         @if ( Session::get('success'))
@@ -97,8 +104,66 @@ use App\Http\Controllers\ChwController;
                 </div>
             </div>
         </div>
-        @if(auth()->user()->access_level == 2)
+        <?php
+        $assign_id = request()->route('id');
+        $user_id = request()->route('user_id');
+        ?>
         <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Choose Phase</h2>
+                        <select class="form-control form-control-lg" id="shipping_selector" name="phase">
+                            <option value="0">--SELECT--</option>
+                            <option value="1">Phase I</option>
+                            <option value="2">Phase II</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $phase_data =  ChwController::get_phase_one_data($assign_id);
+        ?>
+        <div class="row" id="data_1">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <a onclick="myFunction()"><i class="icon-cross" style="margin-top:10px; margin-right:10px;font-size:20px; color:#ff9f80;float:right;cursor: pointer;"></i></a>
+                    <div class="card-body">
+                        <h4 class="card-title">Phase I</h4><br>
+                        <h4 class="card-title">Next Follow Up date</h4><br>
+                        <div class="media">
+                            <i class="icon-bell icon-md text-warning"></i>
+                            <div class="media-body">
+
+                                <p class="card-text" style="margin-left:20px; margin-top:5px;">{{$phase_data}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $phase_data =  ChwController::get_phase_two_data($assign_id);
+        ?>
+        <div class="row" id="data_2">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <a onclick="myFunction2()"><i class="icon-cross" style="margin-top:10px; margin-right:10px;font-size:20px; color:#ff9f80;float:right;cursor: pointer;"></i></a>
+                    <div class="card-body">
+                        <h4 class="card-title">Phase II</h4><br>
+                        <h4 class="card-title">Next Follow Up date</h4><br>
+                        <div class="media">
+                            <i class="icon-bell icon-md text-warning"></i>
+                            <div class="media-body">
+                                <p class="card-text" style="margin-left:20px; margin-top:5px;">{{$phase_data}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if(auth()->user()->access_level == 2)
+        <!-- <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
@@ -124,75 +189,7 @@ use App\Http\Controllers\ChwController;
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Phase I</h4>
-                        <span class="">
-                            <button class="btn btn-info btn-block btn-sm col-sm-2 float-right" type="button" id="new_member" data-toggle="modal" data-target="#phaseOne">
-                                <svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                    <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-                                </svg><!-- <i class="fa fa-plus"></i> --> Add</button>
-                        </span><br>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Important Date</th>
-                                        <th>Contact Next</th>
-                                        <th>Added Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($one_actions as $phase_one)
-                                    <tr>
-                                        <td>{{$phase_one->important_date}}</td>
-                                        <td>{{$phase_one->contact_next}}</td>
-                                        <td>{{$phase_one->created_at}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Phase II</h4>
-                        <span class="">
-                            <button class="btn btn-info btn-block btn-sm col-sm-2 float-right" type="button" id="new_member" data-toggle="modal" data-target="#phaseTwo">
-                                <svg class="svg-inline--fa fa-plus fa-w-14" aria-hidden="true" focusable="false" data-prefix="fa" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg="">
-                                    <path fill="currentColor" d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"></path>
-                                </svg><!-- <i class="fa fa-plus"></i> --> Add</button>
-                        </span><br>
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Important Date</th>
-                                        <th>Contact Next</th>
-                                        <th>Added Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($two_actions as $phase_two)
-                                    <tr>
-                                        <td>{{$phase_one->important_date}}</td>
-                                        <td>{{$phase_one->contact_next}}</td>
-                                        <td>{{$phase_one->created_at}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div> -->
 
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
@@ -282,103 +279,26 @@ use App\Http\Controllers\ChwController;
     </div>
 </div>
 
-<div class="modal" id="phaseOne" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#212529">
-                <h5 class="modal-title">Add in Phase I </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <?php
-            $form_id = request()->route('form_id');
-            $assign_id = request()->route('id');
-            $user_id = request()->route('user_id');
-            ?>
-            <div class="modal-body">
-                <div class="col-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="{{ route('phase.one.post') }}" method="POST" id="additional-info-form">
-                                @csrf
-                                <input type="hidden" name="form_id" value="{{$form_id}}">
-                                <input type="hidden" name="assign_id" value="{{$assign_id}}">
-                                <input type="hidden" name="user_id" value="{{$user_id}}">
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label>Important Date</label>
-                                        <div id="bloodhound">
-                                            <input name="important_date" class="typeahead" type="date" placeholder="States of USA">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label>CONTACT NEXT in 30 days</label>
-                                        <div id="bloodhound">
-                                            <input name="contact_next" class="typeahead" type="date" placeholder="States of USA">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" style="border:none">
-                                    <button class="btn btn-info" type="submit" name="add_new">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal" id="phaseTwo" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:#212529">
-                <h5 class="modal-title">Add in Phase II</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-12 grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="{{ route('phase.two.post') }}" method="POST" id="additional-info-form">
-                                @csrf
-                                <input type="hidden" name="form_id" value="{{$form_id}}">
-                                <input type="hidden" name="assign_id" value="{{$assign_id}}">
-                                <input type="hidden" name="user_id" value="{{$user_id}}">
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label>Important Date</label>
-                                        <div id="bloodhound">
-                                            <input name="important_date" class="typeahead" type="date" placeholder="States of USA">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-6">
-                                        <label>CONTACT NEXT in 14 days</label>
-                                        <div id="bloodhound">
-                                            <input name="contact_next" class="typeahead" type="date" placeholder="States of USA">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" style="border:none">
-                                    <button class="btn btn-info" type="submit" name="add_new">Save</button>
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                </div>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#shipping_selector").change(function() {
+            var id = $(this).val();
+            $("#data_" + id).show();
+        });
 
+
+    });
+
+    function myFunction() {
+        var x = document.getElementById("data_1");
+        x.style.display = "none";
+    }
+
+    function myFunction2() {
+        var x = document.getElementById("data_2");
+        x.style.display = "none";
+    }
+</script>
 @endsection

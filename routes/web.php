@@ -118,6 +118,7 @@ Route::post('chw/search', [ChwController::class, 'search'])->name('chw.searh');
 Route::get('chw/view-tasks/{assign_id}/{user_id}', [ChwController::class, 'view_tasks'])->name('chw/assign-details/{assign_id}/{user_id}');
 
 //phase routes
+
 Route::get('chw/phases', [PhaseController::class, 'phase'])->name('chw/phases');
 Route::get('chw/phase-show/{user_id}/{assign_id}', [PhaseController::class, 'show_phase_content'])->name('chw/phase-show/{user_id}/{assign_id}');
 Route::post('chw/add-phase1', [PhaseController::class, 'add_phase_one'])->name('phase.one.post');

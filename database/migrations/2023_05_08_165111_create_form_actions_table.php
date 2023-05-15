@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('assign_id');
             $table->integer('phase')->default(0);
-            $table->date('important_date')->nullable();
             $table->date('contact_next')->nullable();
             $table->timestamps();
 

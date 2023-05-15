@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Support\Carbon;
 use App\Models\FormAction;
+use Carbon\Carbon as CarbonCarbon;
 
 class ChwController extends Controller
 {
@@ -246,5 +247,24 @@ class ChwController extends Controller
     {
         $tasks = FormTask::where('assign_id', $assign_id)->get();
         return view('dashboard.chw_dashboard.assign.task', compact('tasks'));
+    }
+
+
+    static function  get_phase_one_data($assign_id)
+    {
+        $phase_data = DB::table('chw_assigns')->where('id', $assign_id)->value('created_at');
+        $phase_data = Carbon::parse($phase_data);
+        $daysToAdd = 30;
+        $phase_data = $phase_data->addDays($daysToAdd);
+        return $phase_data;
+    }
+
+    static function  get_phase_two_data($assign_id)
+    {
+        $phase_data = DB::table('chw_assigns')->where('id', $assign_id)->value('created_at');
+        $phase_data = Carbon::parse($phase_data);
+        $daysToAdd = 14;
+        $phase_data = $phase_data->addDays($daysToAdd);
+        return $phase_data;
     }
 }

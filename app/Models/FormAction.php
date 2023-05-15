@@ -11,7 +11,7 @@ class FormAction extends Model
 
     protected $table = 'form_actions';
     protected $fillable = [
-        'assign_id', 'user_id', 'phase', 'important_date', 'contact_next'
+        'assign_id', 'user_id', 'phase', 'contact_next'
     ];
-    protected $dates = ['important_date', 'contact_next'];
+    protected $dates = ['contact_next'];
 }
