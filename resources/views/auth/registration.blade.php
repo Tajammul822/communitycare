@@ -14,6 +14,7 @@
                         <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                         <form action="{{ route('register.post') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="access_level" value="2">
                             <div class="form-group">
                                 <input type="text" id="first_name" class="form-control form-control-lg" placeholder="First Name" name="first_name" required autofocus>
                                 @if ($errors->has('first_name'))
